@@ -1,0 +1,37 @@
+*,
+*::after,
+*::before {
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    box-sizing: border-box;
+}
+
+.container {
+    @include flexCenter;
+    justify-content: space-between;
+    margin: 0 auto;
+    max-width: 100%;
+    padding: 0 15px;
+
+    @include responsive(tab-port) {
+        max-width: 85%;
+    }
+
+    @include responsive(tab-land) {
+        max-width: 90%;
+    }
+
+    @include responsive(desktop) {
+        max-width: 80%;
+    }
+}
+
+.container--fluid {
+    @include responsive(tab-port) {
+        max-width: 100%;
+    }
+}

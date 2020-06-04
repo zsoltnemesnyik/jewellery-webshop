@@ -1,0 +1,20 @@
+// BREAKPOINTS
+@mixin responsive($breakpoint) {
+    @if $breakpoint == tab-port {
+        @media  (min-width: 576px) { @content };
+    }
+
+    @if $breakpoint == tab-land {
+        @media  (min-width: 768px) { @content };
+    }
+    
+    @if $breakpoint == desktop {
+        @media  (min-width: 992px) { @content };
+    }
+}
+
+@mixin flexCenter() {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
