@@ -23,3 +23,6 @@ You can set both select dropdown to 'default' state by clicking on the first opt
 After refreshing the page, the last search is restored, since the items get stored in LocalSession. The script contains a small security check to ensure each displayed data is in the correct format and strip the content from harmful html tags.
 
 Click on **Resize** button to toggle 2 column layout to 1 column layout under tablet view.
+
+## Live version
+https://test.jewelry-shop.nemesnyikzsolt.hu/
