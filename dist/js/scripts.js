@@ -28,13 +28,13 @@ var domController = (function($) {
             // Display the items
             $.each(data, function(key, value) {
                 let title = (value.title.length < titleLimit) ? value.title : value.title.substring(0,titleLimit-1) + '...';
-                let dataItem = '<div class="shopping-box" short-id="' + value['short id'] + '"><img src="' + value.image_link_mb + '" alt="Jewellery image" class="shopping-box__image"><div class="box-details"><p class="box-details__title">' + title + '<span class="tooltiptext">' + value.title + '</span></p><div class="box-details-prices"><h6 class="box-details-prices__crossed">' + value.full_price + '</h6><h6 class="box-details-prices__price">' + value.best_price + '</h6></div></div></div>';
+                let dataItem = '<div class="shopping-box" id="v" short-id="' + value['short id'] + '"><div class="corner"><i class="fas fa-cart-plus"></i></div><img src="' + value.image_link_mb + '" alt="Jewellery image" class="shopping-box__image"><div class="box-details"><p class="box-details__title">' + title + '<span class="tooltiptext">' + value.title + '</span></p><div class="box-details-prices"><h6 class="box-details-prices__crossed">' + value.full_price + '</h6><h6 class="box-details-prices__price">' + value.best_price + '</h6></div></div></div>';
                 $('.shopping__items').append(dataItem);
 
                 // Display item description on click
-                $('body').on('click', '.shopping-box', function(e) {
+                $('body').on('click', '.shopping-box__image', function(e) {
                     $('.popup-overlay').addClass('visible');
-                    let shortID = $(this).attr('short-id');
+                    let shortID = $(this.parentElement).attr('short-id');
         
                     if (value['short id'] == shortID) {
                         let descItem = '<a class="shopping__popup-close"><i class="fas fa-times"></i></a><p class="shopping__popup-text">' + value['description'] + '</p><a href="' + value.link_mb + '" class="shopping__popup-btn" target="_blank">Buy Now</a>';
