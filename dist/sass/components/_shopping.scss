@@ -135,7 +135,6 @@
     .shopping-box {
         border-radius: 10px;
         box-shadow: 2px 2px 8px rgba($color-black, .1);
-        cursor: pointer;
         display: grid;
         grid-template-rows: 2fr 1fr;
         overflow: hidden;
@@ -145,6 +144,7 @@
         .corner {
             @include flexCenter;
             border-radius: 50%;
+            cursor: pointer;
             height: 45px;
             position: absolute;
             right: -5px;
@@ -179,6 +179,7 @@
 
         &__image {
             align-self: center;
+            cursor: pointer;
             justify-self: center;
         }
 

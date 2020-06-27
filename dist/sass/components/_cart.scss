@@ -1,0 +1,198 @@
+.badge {
+    align-items: center;
+    background: gray;
+    border-radius: 50%;
+    bottom: -5px;
+    color: $color-white;
+    display: flex;
+    font-size: 15px;
+    font-weight: 400;
+    left: -15px;
+    height: 25px;
+    justify-content: center;
+    position: absolute;
+    width: 25px;
+    z-index: 1;
+}
+
+.cart {
+    background: $color-white;
+    border-radius: 10px;
+    box-shadow: 2px 2px 6px rgba($color-black, .3);
+    display: grid;
+    grid-template-rows: auto min-content;
+    height: 80vmax;
+    left: 50%;
+    opacity: 0;
+    overflow: hidden;
+    position: fixed;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transition: all .3s;
+    visibility: hidden;
+    width: 75vmin;
+    z-index: 10;
+    
+    @include responsive(tab-port) {
+        height: unset;
+        width: 65vmin;
+    }
+    
+    @include responsive(tab-land) {
+        grid-template-columns: 2fr 1fr;
+        top: calc(50% + 127px/2);
+        width: 100vmin;
+    }
+
+    &.visible {
+        opacity: 1;
+        transition: all .3s;
+        visibility: visible;
+    }
+
+    &__close-btn {
+        background: $color-black;
+        border-bottom-left-radius: 10px;
+        color: $color-white;
+        cursor: pointer;
+        font-size: 20px;
+        padding: 10px;
+        position: absolute;
+        right: 0;
+        transition: all .3s;
+        top: 0;
+
+        &:hover {
+            background: $color-white;
+            color: $color-black;
+        }
+    }
+}
+
+.cart-details {
+    padding: 2rem;
+
+    @include responsive(tab-land) {
+        padding: 3rem;
+    }
+
+    &__title {
+        font-size: 1.8rem;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+
+    .items {
+        margin-bottom: 1.5rem;
+        max-height: 20vmin;
+        overflow-y: scroll;
+        
+        @include responsive(tab-land) {
+            max-height: 25vmin;
+        }
+    }
+
+    .item {
+        align-items: center;
+        display: grid;
+        grid-template-columns: auto 1fr;
+        margin: 0 1.5rem;
+        padding: 1rem 0;
+        position: relative;
+        
+        &:not(:last-of-type)::after {
+            background: rgba($color-black, .1);
+            bottom: 0;
+            content: '';
+            height: 1px;
+            left: 50%;
+            position: absolute;
+            transform: translateX(-50%);
+            width: 90%;
+        }
+
+        &__image {
+            height: 50px;
+            margin-right: 1.5rem;
+            width: 50px;
+
+            img {
+                height: 100%;
+                width: auto;
+            }
+        }
+
+        &__details {
+            display: grid;
+            grid-template-columns: min-content 1fr;
+            grid-template-rows: repeat(2, 1fr);
+            height: 100%;
+        }
+
+        &__name {
+            font-size: 10px;
+            font-weight: 400;
+            grid-column: 1/-1;
+            justify-self: flex-start;
+        }
+
+        &__quantity {
+            border: none;
+            justify-self: flex-end;
+            width: 70px;
+        }
+
+        &__price {
+            justify-self: flex-end;
+        }
+    }
+
+    &__total {
+        text-align: right;
+
+        &:not(.cart-details__total--value) {
+            border-top: 1px solid rgba($color-black, .3);
+        }
+    }
+
+    &__comment-text {
+        display: block;
+        margin-bottom: 1rem;
+        width: 100%;
+    }
+
+    &__order-btn {
+        background: $color-black;
+        border: none;
+        border-radius: 5px;
+        color: $color-white;
+        cursor: pointer;
+        font-size: 1.3rem;
+        padding: 1rem;
+        width: 100%;
+    }
+}
+
+.cart-billing {
+    background: lighten($color-black, 85%);
+    padding: 2rem;
+    
+    @include responsive(tab-land) {
+        padding: 3rem;
+    }
+
+    &__title {
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+
+    &__text {
+        font-size: 1.3rem;
+        text-align: center;
+    }
+    
+    &__text--highlighted {
+        font-weight: 500;
+    }
+}

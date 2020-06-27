@@ -11,6 +11,15 @@ var domController = (function($) {
         $('.shopping__items').toggleClass('resized');
     });
 
+    // Toggle shopping-cart on click
+    $('body').on('click', '.header-bottom__icon', function() {
+        $('.cart').toggleClass('visible');
+
+        $('.cart__close-btn').on('click', function() {
+            $('.cart').removeClass('visible');
+        })
+    });
+
     // Close description on click
     $('body').on('click', function(e) {
         if (e.target.closest('.shopping__popup-close') || e.target.closest('.popup-overlay')) {
@@ -28,7 +37,7 @@ var domController = (function($) {
             // Display the items
             $.each(data, function(key, value) {
                 let title = (value.title.length < titleLimit) ? value.title : value.title.substring(0,titleLimit-1) + '...';
-                let dataItem = '<div class="shopping-box" id="v" short-id="' + value['short id'] + '"><div class="corner"><i class="fas fa-cart-plus"></i></div><img src="' + value.image_link_mb + '" alt="Jewellery image" class="shopping-box__image"><div class="box-details"><p class="box-details__title">' + title + '<span class="tooltiptext">' + value.title + '</span></p><div class="box-details-prices"><h6 class="box-details-prices__crossed">' + value.full_price + '</h6><h6 class="box-details-prices__price">' + value.best_price + '</h6></div></div></div>';
+                let dataItem = '<div class="shopping-box" short-id="' + value['short_id'] + '"><div class="corner"><i class="fas fa-cart-plus"></i></div><img src="' + value.image_link_mb + '" alt="Jewellery image" class="shopping-box__image"><div class="box-details"><p class="box-details__title">' + title + '<span class="tooltiptext">' + value.title + '</span></p><div class="box-details-prices"><h6 class="box-details-prices__crossed">' + value.full_price + '</h6><h6 class="box-details-prices__price">' + value.best_price + '</h6></div></div></div>';
                 $('.shopping__items').append(dataItem);
 
                 // Display item description on click
@@ -36,8 +45,8 @@ var domController = (function($) {
                     $('.popup-overlay').addClass('visible');
                     let shortID = $(this.parentElement).attr('short-id');
         
-                    if (value['short id'] == shortID) {
-                        let descItem = '<a class="shopping__popup-close"><i class="fas fa-times"></i></a><p class="shopping__popup-text">' + value['description'] + '</p><a href="' + value.link_mb + '" class="shopping__popup-btn" target="_blank">Buy Now</a>';
+                    if (value['short_id'] == shortID) {
+                        let descItem = '<a class="shopping__popup-close"><i class="fas fa-times"></i></a><p class="shopping__popup-text">' + value.description + '</p><a href="' + value.link_mb + '" class="shopping__popup-btn" target="_blank">Buy Now</a>';
                         
                         $('.shopping__popup').html(descItem);
                     }
@@ -129,7 +138,7 @@ var Controller = (function($, domCtrl, calcCtrl) {
             state = calcCtrl.init();
         
         // 2.) Make default request
-        $.getJSON('../products.json', function(items){
+        $.getJSON('https://cors-anywhere.herokuapp.com/https://www.nemesnyikzsolt.hu/products.json', function(items){
             // security check if item's data is in correct format and doesn't contain harmful code
             items = $.map(items, function(el) {
                 if (!isNaN(el.best_price) && !isNaN(el.full_price) && typeof el.description == 'string' && typeof el.title == 'string') {
