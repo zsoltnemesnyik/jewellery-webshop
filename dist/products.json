@@ -1,274 +1,240 @@
 [
     {
         "title": "Gold ring with diamond in very beautiful red box",
-        "availability": "In Stock",
-        "currency": "USD",
+        "availability": 0,
         "categories": [
             "Necklaces"
         ],
-        "weight": "",
+        "weight": 50,
         "image_link_mb": "./img/jewelry_1.png",
         "material": "gold",
         "best_price": 100.95,
-        "image_link": "",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque non magna ac felis laoreet rutrum. Vestibulum pellentesque risus in imperdiet vulputate. Nam dapibus ipsum orci, quis finibus dui mollis ut. Nunc elit nibh, aliquet in convallis eget, porta in ex. Vivamus nulla velit, rhoncus quis luctus at, gravida sit amet urna. ",
-        "short id": "6605",
-        "full_price": "120.95"
+        "short_id": 1,
+        "full_price": 120.95
     },
     {
         "title": "Rubin centre earring with emerald raindrops around it",
-        "availability": "Out of stock",
-        "currency": "USD",
+        "availability": 0,
         "categories": [
             "Necklaces"
         ],
-        "weight": "",
+        "weight": 30,
         "image_link_mb": "./img/jewelry_2.png",
         "material": "gold",
-        "best_price": "####",
-        "image_link": "",
+        "best_price": 150,
         "description": "Sed non sollicitudin mauris. In mauris erat, ultricies eget euismod et, mattis id purus. Quisque vitae enim non arcu dictum scelerisque ac et nibh. Donec gravida sem ac mi scelerisque, at egestas velit feugiat. Nullam bibendum mi diam, ac condimentum libero rutrum eget. Mauris eget purus tempus, dignissim ante ac, sagittis nisl. Aliquam efficitur vitae nisi in fringilla. ",
-        "short id": "6606",
-        "full_price": "200.95"
+        "short_id": 2,
+        "full_price": 200.95
     },
     {
         "title": "Simple necklace with diamond raindrop",
-        "availability": "In Stock",
-        "currency": "USD",
+        "availability": 5,
         "categories": [
             "Necklaces"
         ],
-        "weight": "",
+        "weight": 80,
         "image_link_mb": "./img/jewelry_3.png",
         "material": "",
-        "best_price": "X!?::23",
-        "image_link": "",
+        "best_price": 150,
         "description": "Curabitur ac lectus semper orci gravida consectetur sed id felis. Duis sed dapibus dui. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nullam convallis, tortor quis sodales dictum, augue urna mollis mauris, at venenatis ante lorem scelerisque erat. ",
-        "short id": "6607",
-        "full_price": "190.95"
+        "short_id": 3,
+        "full_price": 190.95
     },
     {
         "title": "Pair of wedding ring, with diamond in the centre of it",
-        "availability": "In Stock",
-        "currency": "USD",
+        "availability": 15,
         "categories": [
             "Necklaces"
         ],
-        "weight": "",
+        "weight": 60,
         "image_link_mb": "./img/jewelry_4.png",
         "material": "gold",
         "best_price": 100.95,
-        "image_link": "",
         "description": "Nam a risus cursus, maximus magna sit amet, vestibulum nulla. Integer nec suscipit neque. Curabitur ut suscipit turpis. Duis ullamcorper nunc ac facilisis placerat. Fusce sollicitudin mauris et quam facilisis, et hendrerit massa dignissim. Vestibulum a neque nibh. Duis ut elementum risus, et viverra arcu.",
-        "short id": "6610",
-        "full_price": "159.95"
+        "short_id": 4,
+        "full_price": 159.95
     },
     {
         "title": "Beautiful Pearl Bracelet",
-        "availability": "In Stock",
-        "currency": "USD",
+        "availability": 15,
         "categories": [
             "Necklaces"
         ],
-        "weight": "",
+        "weight": 40,
         "image_link_mb": "./img/jewelry_5.png",
         "material": "",
         "best_price": 70.95,
-        "image_link": "",
         "description": "Phasellus interdum vitae odio eu interdum. Donec non urna a dolor imperdiet mattis quis vitae augue. Mauris porta nisi fringilla mollis tincidunt. Maecenas in ex eget felis euismod sagittis ac sed sem.",
-        "short id": "6612",
-        "full_price": "100.95"
+        "short_id": 5,
+        "full_price": 100.95
     },
     {
         "title": "Beautiful silver necklace with flower and blue crystal in the centre",
-        "availability": "Out of stock",
-        "currency": "USD",
+        "availability": 0,
         "categories": [
             "Necklaces"
         ],
-        "weight": "",
+        "weight": 30,
         "image_link_mb": "./img/jewelry_6.png",
         "material": "silver",
         "best_price": 80.95,
-        "image_link": "",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque non magna ac felis laoreet rutrum. Vestibulum pellentesque risus in imperdiet vulputate. Nam dapibus ipsum orci, quis finibus dui mollis ut. Nunc elit nibh, aliquet in convallis eget, porta in ex. Vivamus nulla velit, rhoncus quis luctus at, gravida sit amet urna. ",
-        "short id": "6615",
-        "full_price": "105.95"
+        "short_id": 6,
+        "full_price": 105.95
     },
     {
         "title": "Pair of beautiful earrings with emerald",
-        "availability": "In Stock",
-        "currency": "USD",
+        "availability": 15,
         "categories": [
             "Necklaces"
         ],
-        "weight": "",
+        "weight": 20,
         "image_link_mb": "./img/jewelry_7.png",
         "material": "gold",
         "best_price": 95.95,
-        "image_link": "",
         "description": "Sed et ex at nulla vestibulum ultrices at nec metus. Suspendisse lacinia, nibh non sollicitudin blandit, augue leo sagittis erat, sed molestie mi ipsum eget metus. Interdum et malesuada fames ac ante ipsum primis in faucibus. ",
-        "short id": "6625",
-        "full_price": "?!#C@@()+-"
+        "short_id": 7,
+        "full_price": 101.55
     },
     {
         "title": "Beautiful earring with huge rubin in the centre",
-        "availability": "Out of stock",
-        "currency": "USD",
+        "availability": 0,
         "categories": [
             "Necklaces"
         ],
-        "weight": "",
+        "weight": 35,
         "image_link_mb": "./img/jewelry_8.png",
         "material": "gold",
         "best_price": 200.95,
-        "image_link": "",
         "description": "Donec justo elit, auctor ac luctus pulvinar, sagittis a lorem. Duis ac imperdiet nisl. Mauris sagittis, erat a volutpat luctus, lectus odio hendrerit orci, sit amet mattis mi enim vel felis. Pellentesque nec elementum sapien.",
-        "short id": "6635",
-        "full_price": "250.95"
+        "short_id": 8,
+        "full_price": 250.95
     },
     {
         "title": "Gold necklace with Dollar sign",
-        "availability": "In Stock",
-        "currency": "USD",
+        "availability": 15,
         "categories": [
             "Necklaces"
         ],
-        "weight": "",
+        "weight": 45,
         "image_link_mb": "./img/jewelry_9.png",
         "material": "gold",
         "best_price": 190.95,
-        "image_link": "",
-        "description": "<a href='http://www.index.hu'>CLICK HERE!!!</a>",
-        "short id": "6645",
-        "full_price": "249.95"
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque non magna ac felis laoreet rutrum. Vestibulum pellentesque risus in imperdiet vulputate. Nam dapibus ipsum orci, quis finibus dui mollis ut. Nunc elit nibh, aliquet in convallis eget, porta in ex. Vivamus nulla velit, rhoncus quis luctus at, gravida sit amet urna.",
+        "short_id": 9,
+        "full_price": 249.95
     },
     {
-        "title": "<a href='http://www.hackkkk.com'>THIS IS A HACK</a>",
-        "availability": "In Stock",
-        "currency": "USD",
+        "title": "Beautiful jewelry",
+        "availability": 15,
         "categories": [
             "Necklaces"
         ],
-        "weight": "",
+        "weight": 38,
         "image_link_mb": "./img/jewelry_10.png",
         "material": "gold",
         "best_price": 180.95,
-        "image_link": "",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque non magna ac felis laoreet rutrum. Vestibulum pellentesque risus in imperdiet vulputate. Nam dapibus ipsum orci, quis finibus dui mollis ut. Nunc elit nibh, aliquet in convallis eget, porta in ex. Vivamus nulla velit, rhoncus quis luctus at, gravida sit amet urna. ",
-        "short id": "6640",
-        "full_price": "230.95"
+        "short_id": 10,
+        "full_price": 230.95
     },
     {
         "title": "Necklace with crystal raindrops and pearls",
-        "availability": "Out of stock",
-        "currency": "USD",
+        "availability": 0,
         "categories": [
             "Necklaces"
         ],
-        "weight": "",
+        "weight": 44,
         "image_link_mb": "./img/jewelry_11.png",
         "material": "",
         "best_price": 250.95,
-        "image_link": "",
         "description": "Aliquam a lacinia urna, in ornare ligula. Sed vel iaculis lectus, a feugiat magna. Maecenas tempus interdum nibh, vitae vestibulum dui vehicula eu. Proin tempus libero est, at hendrerit magna imperdiet volutpat.",
-        "short id": "6630",
-        "full_price": "300.95"
+        "short_id": 11,
+        "full_price": 300.95
     },
     {
         "title": "Gold bracelet with joyful signs around",
-        "availability": "In Stock",
-        "currency": "USD",
+        "availability": 15,
         "categories": [
             "Necklaces"
         ],
-        "weight": "",
+        "weight": 50,
         "image_link_mb": "./img/jewelry_12.png",
         "material": "gold",
         "best_price": 260.95,
-        "image_link": "",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque non magna ac felis laoreet rutrum. Vestibulum pellentesque risus in imperdiet vulputate. Nam dapibus ipsum orci, quis finibus dui mollis ut. Nunc elit nibh, aliquet in convallis eget, porta in ex. Vivamus nulla velit, rhoncus quis luctus at, gravida sit amet urna. ",
-        "short id": "6660",
-        "full_price": "310.95"
+        "short_id": 12,
+        "full_price": 310.95
     },
     {
         "title": "Pair of silver earrings with blue crystal",
-        "availability": "In Stock",
-        "currency": "USD",
+        "availability": 15,
         "categories": [
             "Necklaces"
         ],
-        "weight": "",
+        "weight": 42,
         "image_link_mb": "./img/jewelry_13.png",
         "material": "silver",
         "best_price": 300.95,
-        "image_link": "",
         "description": "Donec sit amet est ac leo ullamcorper suscipit vitae et sem. Nam eleifend est tristique nibh pretium cursus. Praesent viverra ex eu luctus tempus. Aenean volutpat, justo nec bibendum rhoncus, justo turpis lacinia urna, commodo porta mi purus id justo. Suspendisse quis accumsan elit. Nulla consectetur id nibh in varius. Praesent pellentesque dignissim urna, vitae gravida nibh finibus nec. ",
-        "short id": "6665",
-        "full_price": "390.95"
+        "short_id": 13,
+        "full_price": 390.95
     },
     {
         "title": "Pair of simple gold earrings",
-        "availability": "Out of stock",
-        "currency": "USD",
+        "availability": 0,
         "categories": [
             "Necklaces"
         ],
-        "weight": "",
+        "weight": 32,
         "image_link_mb": "./img/jewelry_14.png",
         "material": "gold",
         "best_price": 350.95,
-        "image_link": "",
         "description": "Vivamus non risus nec libero pharetra aliquet in eu metus. Maecenas luctus, metus non condimentum venenatis, risus enim rhoncus mauris, ac volutpat ante ipsum et justo. Curabitur egestas enim leo, sed tincidunt velit placerat vitae. ",
-        "short id": "6666",
-        "full_price": "400.95"
+        "short_id": 14,
+        "full_price": 400.95
     },
     {
         "title": "Gold bracelet with rubin in the centre",
-        "availability": "In Stock",
-        "currency": "USD",
+        "availability": 15,
         "categories": [
             "Necklaces"
         ],
-        "weight": "",
+        "weight": 99,
         "image_link_mb": "./img/jewelry_15.png",
         "material": "gold",
         "best_price": 400.95,
-        "image_link": "",
         "description": "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Mauris vel lobortis ex. Sed enim turpis, accumsan sit amet tellus quis, sodales rutrum lorem. Vestibulum nec ornare ex. Nam fermentum pretium enim, et dapibus tortor rutrum et. Nulla efficitur eu odio vel malesuada. Morbi cursus faucibus augue vel pellentesque. Nunc id metus sed lectus finibus dictum id non orci.",
-        "short id": "6667",
-        "full_price": "500.95"
+        "short_id": 15,
+        "full_price": 500.95
     },
     {
-        "title": "Gold bracelet with rubin in the centre",
-        "availability": "In Stock",
-        "currency": "USD",
+        "title": "Silver bracelet with rubin in the centre",
+        "availability": 15,
         "categories": [
             "Necklaces"
         ],
-        "weight": "",
+        "weight": 77,
         "image_link_mb": "./img/jewelry_10.png",
         "material": "silver",
         "best_price": 30.95,
-        "image_link": "",
         "description": "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Mauris vel lobortis ex. Sed enim turpis, accumsan sit amet tellus quis, sodales rutrum lorem. Vestibulum nec ornare ex. Nam fermentum pretium enim, et dapibus tortor rutrum et. Nulla efficitur eu odio vel malesuada. Morbi cursus faucibus augue vel pellentesque. Nunc id metus sed lectus finibus dictum id non orci.",
-        "short id": "6663",
-        "full_price": "50.95"
+        "short_id": 16,
+        "full_price": 50.95
     },
     {
-        "title": "Gold bracelet with rubin in the centre",
-        "availability": "In Stock",
-        "currency": "USD",
+        "title": "Silver bracelet with rubin in the centre",
+        "availability": 15,
         "categories": [
             "Necklaces"
         ],
-        "weight": "",
+        "weight": 58,
         "image_link_mb": "./img/jewelry_2.png",
         "material": "silver",
         "best_price": 65.95,
-        "image_link": "",
         "description": "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Mauris vel lobortis ex. Sed enim turpis, accumsan sit amet tellus quis, sodales rutrum lorem. Vestibulum nec ornare ex. Nam fermentum pretium enim, et dapibus tortor rutrum et. Nulla efficitur eu odio vel malesuada. Morbi cursus faucibus augue vel pellentesque. Nunc id metus sed lectus finibus dictum id non orci.",
-        "short id": "6664",
-        "full_price": "70.95"
+        "short_id": 17,
+        "full_price": 70.95
     }
 ]
