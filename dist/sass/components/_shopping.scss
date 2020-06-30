@@ -133,10 +133,12 @@
     }
     
     .shopping-box {
+        align-items: center;
         border-radius: 10px;
         box-shadow: 2px 2px 8px rgba($color-black, .1);
         display: grid;
         grid-template-rows: 2fr 1fr;
+        justify-content: center;
         overflow: hidden;
         position: relative;
         z-index: 0;
@@ -184,7 +186,9 @@
         }
 
         .box-details {
+            align-content: space-between;
             border-top: 1px solid rgba($color-black, .1);
+            display: grid;
             padding: 1rem;
 
             &__title {

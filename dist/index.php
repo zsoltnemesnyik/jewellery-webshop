@@ -95,56 +95,78 @@ $connection = mysqli_connect('localhost', 'root', '', 'jewelry');
                     </div>
                 </form>
                 <div class="shopping__items">
-                <div class="shopping-box" short-id="' + value['short_id'] + '"><div class="corner"><i class="fas fa-cart-plus"></i></div><img src="' + value.image_link_mb + '" alt="Jewellery image" class="shopping-box__image"><div class="box-details"><p class="box-details__title">' + title + '<span class="tooltiptext">' + value.title + '</span></p><div class="box-details-prices"><h6 class="box-details-prices__crossed">' + value.full_price + '</h6><h6 class="box-details-prices__price">' + value.best_price + '</h6></div></div></div>
+                <?php
+                    $query = "SELECT * FROM products ORDER BY product_id ASC";
+                    $result = mysqli_query($connection, $query);
+
+                    while($row = mysqli_fetch_array($result)) {
+                ?>
+                        <div class="shopping-box" short-id="<?php echo $row['product_id'];?>">
+                            <div class="corner" id="<?php echo $row["product_id"];?>">
+                                <i class="fas fa-cart-plus"></i>
+                            </div> 
+                            <img src="./img/<?php echo $row['product_image'];?>" alt="Jewellery image" class="shopping-box__image" id="image-<?php echo $row['product_id']?>">
+                            <div class="box-details">
+                                <p class="box-details__title">
+                                    <?php echo $row['product_title'];?>
+                                    <span class="tooltiptext"><?php echo $row['product_title'];?></span>
+                                </p>
+                                <div class="box-details-prices">
+                                    <h6 class="box-details-prices__crossed"><?php echo $row['product_price-crossed'];?></h6>
+                                    <h6 class="box-details-prices__price"><?php echo $row['product_price-best'];?></h6>
+                                    <input type="number" name="quantity" id="quantity<?php echo $row['product_id'];?>" value="1">
+                                    <input type="hidden" name="hidden_name" id="name<?php echo $row['product_id'];?>" value="<?php echo $row['product_title'];?>">
+                                    <input type="hidden" name="hidden_price" id="price<?php echo $row['product_id']?>" value="<?php echo $row['product_price-best'];?>">
+                                </div>
+                            </div>
+                        </div>
+                <?php
+                    }
+                ?>
+                
                 </div>
 
                 <div class="popup-overlay"></div>
                 <div class="shopping__popup"></div>
-
+                        
                 <div class="cart">
                     <i class="fas fa-times cart__close-btn"></i>
                     <div class="cart-details">
                         <h3 class="cart-details__title">Your Cart</h3>
-                        <form method="post" class="cart-details__form">
-                            <div class="items">
-                                <div class="item">
-                                    <div class="item__image">
-                                        <img src="./img/jewelry_1.png" alt="Cart image">
-                                    </div>
-                                    <div class="item__details">
-                                        <h3 class="item__name">Product name</h3>
-                                        <input type="number" name="quantity" class="item__quantity" min="1">
-                                        <h3 class="item__price">400$</h3>
-                                    </div>
+                        <div class="items">
+                            <?php
+                            if(!empty($_SESSION['shopping_cart'])) {
+                                $total = 0;
+                                foreach ($_SESSION['shopping_cart'] as $keys => $values) {
+                            ?>
+                            <div class="item">
+                                <div class="item__image">
+                                    <img src="<?php echo $values['productImage']?>" alt="Cart image">
                                 </div>
-                                <div class="item">
-                                    <div class="item__image">
-                                        <img src="./img/jewelry_1.png" alt="Cart image">
-                                    </div>
-                                    <div class="item__details">
-                                        <h3 class="item__name">Product name</h3>
-                                        <input type="number" name="quantity" class="item__quantity" min="1">
-                                        <h3 class="item__price">400$</h3>
-                                    </div>
+                                <div class="item__details">
+                                    <h3 class="item__name"><?php echo $values['productName'];?></h3>
+                                    <input type="text" name="quantity[]" id="quantity<?php echo $values['productID'];?>" value="<?php echo $values['productQuantity'];?>" data-product-id="<?php echo $values['productID']?>" class="quantity">
+                                    <h3 class="item__price"><?php echo $values['productPrice'];?> $</h3>
+                                    <h3 class="item__price"><?php echo number_format($values['productQuantity'] * $values['productPrice'], 2);?> $</h3>
                                 </div>
-                                <div class="item">
-                                    <div class="item__image">
-                                        <img src="./img/jewelry_1.png" alt="Cart image">
-                                    </div>
-                                    <div class="item__details">
-                                        <h3 class="item__name">Product name</h3>
-                                        <input type="number" name="quantity" class="item__quantity" min="1">
-                                        <h3 class="item__price">400$</h3>
-                                    </div>
-                                </div>
+                                <button name="delete" class="delete" id="<?php echo $values['productID'];?>">Remove</button>
                             </div>
-                            <h3 class="cart-details__total">
-                                Total:
-                                <span class="cart-details__total cart-details__total--value">0.00$</span>
-                            </h3>
+                            <?php
+                                $total = $total + ($values['productQuantity'] * $values['productPrice']);
+                            }
+                            ?>
+                        </div>
+                        <h3 class="cart-details__total">
+                            Total:
+                            <span class="cart-details__total cart-details__total--value"><?php echo number_format($total, 2);?> $</span>
+                        </h3>
+                        <?php
+                        }
+                        ?>
+                        <form action="./includes/cart.php" method="post">
                             <h3 class="cart-details__comment">Leave additional comment:</h3>
                             <textarea name="comment" rows="6" class="cart-details__comment-text"></textarea>
-                            <button type="submit" class="cart-details__order-btn">Send Order</button>
+                            <input type="submit" name="place_order" class="cart-details__order-btn" value="Send Order">
                         </form>
                     </div>
                     <div class="cart-billing">

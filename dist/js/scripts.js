@@ -132,7 +132,7 @@ var Controller = (function($, domCtrl, calcCtrl) {
 
         // 1.) Initialization
             // Empty the items list in the DOM
-            domCtrl.emptyItems();
+            // domCtrl.emptyItems();
 
             // 2.) Init state variable to default values
             state = calcCtrl.init();
@@ -170,9 +170,9 @@ var Controller = (function($, domCtrl, calcCtrl) {
                     domCtrl.toggleSelAttr('.select-filter__option', state.material);
                 }
 
-                domCtrl.displayItemsResultsDescriptions(state.modArr);
+                // domCtrl.displayItemsResultsDescriptions(state.modArr);
             } else {
-                domCtrl.displayItemsResultsDescriptions(items);
+                // domCtrl.displayItemsResultsDescriptions(items);
             }
             
             // Sort the items on click, according to selected option's value
@@ -247,3 +247,88 @@ var Controller = (function($, domCtrl, calcCtrl) {
             })
         });
 }(jQuery, domController, calcController));
+
+$(document).ready(function(){  
+    $('.corner').click(function(){  
+        let productID = $(this).attr("id");  
+        let productName = $('#name'+productID).val();  
+        let productPrice = $('#price'+productID).val();  
+        let productQuantity = $('#quantity'+productID).val();  
+        let productImage = $('#image-'+productID).attr('src');
+        let action = "add";  
+        if(productQuantity > 0)  
+        {  
+            $.ajax({  
+                url:"./includes/action.php",  
+                method:"POST",  
+                dataType:"json",  
+                data:{  
+                    productID: productID,   
+                    productName: productName,   
+                    productPrice: productPrice,   
+                    productQuantity: productQuantity,
+                    productImage: productImage,
+                    action: action  
+                },  
+                success:function(data) {
+                    $('.cart-details').html(data['orderTable']);  
+                    $('.badge').text(data['cartItem']);
+
+                    alert("Item added to cart");
+                }  
+            });  
+        }  
+        else  
+        {  
+            alert("Please Enter Number of Quantity");
+        }  
+    });
+
+    $(document).on('click', '.delete', function() {
+        let productID = $(this).attr('id');
+        let action = 'remove';
+
+        
+
+        if(confirm('Are you sure you want to remove this product?')) {
+            $.ajax({
+                url: './includes/action.php',
+                method: 'POST',
+                dataType: 'json',
+                data: {
+                    productID: productID,
+                    action: action
+                },
+                success: function(data) {
+                    $('.cart-details').html(data['orderTable']);
+                    $('.badge').text(data['cartItem']);
+                }
+            });
+        } else {
+            return false;
+        }
+    });
+
+    $(document).on('keyup', '.quantity', function() {
+        let productID = $(this).data('product-id');
+        let productQuantity = $(this).val();
+        let action = 'quantity_change';
+
+        console.log('teszt');
+        if (productQuantity != '') {
+            $.ajax({
+                url: './includes/action.php',
+                method: 'POST',
+                dataType: 'json',
+                data: {
+                    productID: productID,
+                    productQuantity: productQuantity,
+                    action: action
+                },
+                success: function(data) {
+                    $('.cart-details').html(data['orderTable']);
+                }
+            });
+        }
+    })
+});
