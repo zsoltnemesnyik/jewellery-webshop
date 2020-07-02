@@ -13,7 +13,7 @@ var domController = (function($) {
 
     // Toggle shopping-cart on click
     $('body').on('click', '.header-bottom__icon', function() {
-        $('.cart').toggleClass('visible');
+        $('.cart').toggleClass('visible');        
 
         $('.cart__close-btn').on('click', function() {
             $('.cart').removeClass('visible');
@@ -284,11 +284,9 @@ $(document).ready(function(){
         }  
     });
 
-    $(document).on('click', '.delete', function() {
+    $(document).on('click', '.item__delete', function() {
         let productID = $(this).attr('id');
         let action = 'remove';
-
-        
 
         if(confirm('Are you sure you want to remove this product?')) {
             $.ajax({
@@ -309,7 +307,7 @@ $(document).ready(function(){
         }
     });
 
-    $(document).on('keyup', '.quantity', function() {
+    $(document).on('keyup change click', '.quantity', function() {
         let productID = $(this).data('product-id');
         let productQuantity = $(this).val();
         let action = 'quantity_change';

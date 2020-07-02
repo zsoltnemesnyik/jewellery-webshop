@@ -44,9 +44,6 @@ $connection = mysqli_connect('localhost', 'root', '', 'jewelry');
                             <a href="#" class="navigation__link">Lorem</a>
                         </li>
                         <li class="navigation__item">
-                            <a href="#" class="navigation__link">Lorem</a>
-                        </li>
-                        <li class="navigation__item">
                             <a href="#" class="navigation__link">Lorem Ipsum</a>
                         </li>
                         <li class="navigation__item">
@@ -54,9 +51,6 @@ $connection = mysqli_connect('localhost', 'root', '', 'jewelry');
                         </li>
                         <li class="navigation__item">
                             <a href="#" class="navigation__link">Ipsum Dolor</a>
-                        </li>
-                        <li class="navigation__item">
-                            <a href="#" class="navigation__link">Lorem</a>
                         </li>
                     </ul>
                 </nav>
@@ -102,19 +96,42 @@ $connection = mysqli_connect('localhost', 'root', '', 'jewelry');
                     while($row = mysqli_fetch_array($result)) {
                 ?>
                         <div class="shopping-box" short-id="<?php echo $row['product_id'];?>">
+                        <?php 
+                            if ($row['product_availability'] <= 5 && $row['product_availability'] > 0) {
+                        ?>
+                            <div class="stock stock--warning">
+                                <h3 class="stock__text">low stock</h3>
+                            </div>
+                        <?php
+                            }
+                            
+                            if ($row['product_availability'] == 0) {
+                        ?>        
+                            <div class="stock stock--error">
+                                <h3 class="stock__text">out of stock</h3>
+                            </div>
+                        <?php
+                            }
+
+                            if ($row['product_availability'] > 0) {
+                        ?>
                             <div class="corner" id="<?php echo $row["product_id"];?>">
                                 <i class="fas fa-cart-plus"></i>
-                            </div> 
-                            <img src="./img/<?php echo $row['product_image'];?>" alt="Jewellery image" class="shopping-box__image" id="image-<?php echo $row['product_id']?>">
+                            </div>
+
+                        <?php
+                            }
+                        ?>
+                            <img src="./img/<?php echo $row['product_image'];?>" <?php if ($row['product_availability'] == 0) {echo 'style="opacity: .3"';}?> alt="Jewellery image" class="shopping-box__image" id="image-<?php echo $row['product_id']?>">
                             <div class="box-details">
                                 <p class="box-details__title">
                                     <?php echo $row['product_title'];?>
                                     <span class="tooltiptext"><?php echo $row['product_title'];?></span>
                                 </p>
-                                <div class="box-details-prices">
-                                    <h6 class="box-details-prices__crossed"><?php echo $row['product_price-crossed'];?></h6>
-                                    <h6 class="box-details-prices__price"><?php echo $row['product_price-best'];?></h6>
-                                    <input type="number" name="quantity" id="quantity<?php echo $row['product_id'];?>" value="1">
+                                <div class="box-details-specs">
+                                    <h6 class="box-details-specs__weight"><?php echo $row['product_weight'];?>gr</h6>
+                                    <h6 class="box-details-specs__price"><?php echo number_format($row['product_price-best'], 2);?>$</h6>
+                                    <input type="number" class="box-details-specs__quantity" name="quantity" id="quantity<?php echo $row['product_id'];?>" <?php if ($row['product_availability'] == 0) {echo 'value="0"'; echo 'disabled="disabled"';} else {echo 'value="1"';}?>>
                                     <input type="hidden" name="hidden_name" id="name<?php echo $row['product_id'];?>" value="<?php echo $row['product_title'];?>">
                                     <input type="hidden" name="hidden_price" id="price<?php echo $row['product_id']?>" value="<?php echo $row['product_price-best'];?>">
                                 </div>
@@ -145,11 +162,13 @@ $connection = mysqli_connect('localhost', 'root', '', 'jewelry');
                                 </div>
                                 <div class="item__details">
                                     <h3 class="item__name"><?php echo $values['productName'];?></h3>
-                                    <input type="text" name="quantity[]" id="quantity<?php echo $values['productID'];?>" value="<?php echo $values['productQuantity'];?>" data-product-id="<?php echo $values['productID']?>" class="quantity">
-                                    <h3 class="item__price"><?php echo $values['productPrice'];?> $</h3>
-                                    <h3 class="item__price"><?php echo number_format($values['productQuantity'] * $values['productPrice'], 2);?> $</h3>
+                                    <input type="number" name="quantity[]" id="quantity<?php echo $values['productID'];?>" value="<?php echo $values['productQuantity'];?>" data-product-id="<?php echo $values['productID']?>" class="quantity">
+                                    <h3 class="item__price"><?php echo $values['productPrice'];?>$</h3>
+                                    <h3 class="item__price"><?php echo number_format($values['productQuantity'] * $values['productPrice'], 2);?>$</h3>
+                                <button name="delete" class="item__delete" id="<?php echo $values['productID'];?>">
+                                    <i class="fas fa-times-circle"></i>
+                                </button>
                                 </div>
-                                <button name="delete" class="delete" id="<?php echo $values['productID'];?>">Remove</button>
                             </div>
                             <?php
                                 $total = $total + ($values['productQuantity'] * $values['productPrice']);
@@ -158,14 +177,14 @@ $connection = mysqli_connect('localhost', 'root', '', 'jewelry');
                         </div>
                         <h3 class="cart-details__total">
                             Total:
-                            <span class="cart-details__total cart-details__total--value"><?php echo number_format($total, 2);?> $</span>
+                            <span class="cart-details__total cart-details__total--value"><?php echo number_format($total, 2);?>$</span>
                         </h3>
                         <?php
                         }
                         ?>
-                        <form action="./includes/cart.php" method="post">
+                        <form action="includes/cart.php" method="post">
                             <h3 class="cart-details__comment">Leave additional comment:</h3>
-                            <textarea name="comment" rows="6" class="cart-details__comment-text"></textarea>
+                            <textarea name="comment" rows="3" class="cart-details__comment-text"></textarea>
                             <input type="submit" name="place_order" class="cart-details__order-btn" value="Send Order">
                         </form>
                     </div>

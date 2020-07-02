@@ -34,7 +34,7 @@
                 if (mysqli_multi_query($connection, $order_details)) {
                     unset($_SESSION['shopping_cart']);
                     echo '<script>alert("You have successfully placed an order...Thank you!")</script>';
-                    echo '<script>window.location.href="./cart.php"</script>';
+                    // echo '<script>window.location.href="./includes/cart.php"</script>';
                 }
             }
 

@@ -71,11 +71,13 @@
                         </div>
                         <div class="item__details">
                             <h3 class="item__name">' . $values['productName'] . '</h3>
-                            <input type="text" name="quantity[]" id="quantity' . $values['productID'] . '" value="' . $values['productQuantity'] . '" data-product-id="' . $values['productID'] . '" class="quantity">
-                            <h3 class="item__price">' . $values['productPrice'] . ' $</h3>
-                            <h3 class="item__price">' . number_format($values['productQuantity'] * $values['productPrice'], 2) . ' $</h3>
+                            <input type="number" name="quantity[]" id="quantity' . $values['productID'] . '" value="' . $values['productQuantity'] . '" data-product-id="' . $values['productID'] . '" class="quantity">
+                            <h3 class="item__price">' . $values['productPrice'] . '$</h3>
+                            <h3 class="item__price">' . number_format($values['productQuantity'] * $values['productPrice'], 2) . '$</h3>
+                            <button name="delete" class="item__delete" id="' . $values['productID'] . '">
+                                <i class="fas fa-times-circle"></i>
+                            </button>
                         </div>
-                        <button name="delete" class="delete" id="' . $values['productID'] . '">Remove</button>
                     </div>
                 ';
                 $total = $total + ($values['productQuantity'] * $values['productPrice']);
@@ -85,14 +87,14 @@
                 </div>
                 <h3 class="cart-details__total">
                     Total:
-                    <span class="cart-details__total cart-details__total--value">' . number_format($total, 2) . ' $</span>
+                    <span class="cart-details__total cart-details__total--value">' . number_format($total, 2) . '$</span>
                 </h3>
             ';
         }
         $orderTable .= '
-            <form action="cart.php" method="post">
+            <form action="./includes/cart.php" method="post">
                 <h3 class="cart-details__comment">Leave additional comment:</h3>
-                <textarea name="comment" rows="6" class="cart-details__comment-text"></textarea>
+                <textarea name="comment" rows="3" class="cart-details__comment-text"></textarea>
                 <input type="submit" name="place_order" class="cart-details__order-btn" value="Send Order">
             </form>
         ';
