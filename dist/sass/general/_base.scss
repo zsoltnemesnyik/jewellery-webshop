@@ -6,6 +6,10 @@
     padding: 0;
 }
 
+body {
+    background: rgba($color-black, .25);
+}
+
 html {
     box-sizing: border-box;
 }
@@ -22,11 +26,11 @@ html {
     }
 
     @include responsive(tab-land) {
-        max-width: 90%;
+        max-width: 87.5%;
     }
 
     @include responsive(desktop) {
-        max-width: 80%;
+        max-width: 90%;
     }
 }
 

@@ -69,6 +69,33 @@
                 width: 20%;
             }
 
+            select {
+                background: rgba($color-black, .01);
+                border: none;
+                border-radius: 5px;
+                box-shadow: 
+                    8px 8px 13px 0 rgba(0, 0, 0, 0.25),
+                    -6px -6px 10px 0 rgba(255, 255, 255, 0.3);
+                cursor: pointer;
+                padding: 10px 0 10px 25px;
+                width: 100%;
+
+                -moz-appearance:none; /* Firefox */
+                -webkit-appearance:none; /* Safari and Chrome */
+                appearance:none;
+
+                // &:active,
+                &:focus {
+                    box-shadow: 
+                        8px 8px 13px 0 rgba(255, 255, 255, 0.3) inset,
+                        -6px -6px 10px 0 rgba(0, 0, 0, .25) inset;
+                }
+
+                & > * {
+                    background: rgba($color-black, .05);
+                }
+            }
+
             &::after {
                 color: $color-black;
                 font-family: "Font Awesome 5 Free";
@@ -96,17 +123,6 @@
                 content: '\f0b0';
             }
         }
-
-        select {
-            background: rgba($color-black, .1);
-            border: 1px solid rgba($color-black, .15);
-            padding: 5px 0 5px 25px;
-            width: 100%;
-
-            -moz-appearance:none; /* Firefox */
-            -webkit-appearance:none; /* Safari and Chrome */
-            appearance:none;
-        }
     }
 
     .shopping__items {
@@ -118,6 +134,10 @@
         width: 100%;
 
         @include responsive(tab-land) {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        @include responsive(desktop) {
             grid-template-columns: repeat(4, 1fr);
         }
 
@@ -135,13 +155,37 @@
     .shopping-box {
         align-items: center;
         border-radius: 10px;
-        box-shadow: 2px 2px 8px rgba($color-black, .1);
+        box-shadow: 
+            12px 12px 16px 0 rgba(0, 0, 0, 0.2),
+            -8px -8px 12px 0 rgba(255, 255, 255, 0.25);
         display: grid;
-        grid-template-rows: 2fr 1fr;
+        grid-template-columns: 1fr;
+        grid-template-rows: minmax(100px, 1.6fr) 1fr;
         justify-content: center;
         overflow: hidden;
         position: relative;
         z-index: 0;
+
+        .stock {
+            color: $color-white;
+            padding: 0 30px 0 15px;
+            position: absolute;
+            top: 1.5rem;
+            transform: skewY(-40deg);
+            
+            &--warning {
+                background: #ff9900;
+            }
+            
+            &--error {
+                background: #cc0000;
+            }
+            
+            &__text {
+                font-size: 1rem;
+                font-weight: 300;
+            }
+        }
      
         .corner {
             @include flexCenter;
@@ -183,19 +227,26 @@
             align-self: center;
             cursor: pointer;
             justify-self: center;
+            transition: all .3s ease-in-out;
+            z-index: -2;
+
+            &:hover {
+                transform: scale(1.15);
+            }
         }
 
         .box-details {
             align-content: space-between;
             border-top: 1px solid rgba($color-black, .1);
             display: grid;
+            height: 100%;
             padding: 1rem;
 
             &__title {
                 cursor: default;
                 font-size: 1.2rem;
                 line-height: 1.2;
-                margin-bottom: 1rem;
+                margin-bottom: 3rem;
                 position: relative;
                 
                 .tooltiptext {
@@ -218,27 +269,43 @@
                 }
             }
 
-            &-prices {
-                display: flex;
+            &-specs {
+                align-items: center;
+                display: grid;
                 font-size: 1.8rem;
-                justify-content: space-between;
-
+                grid-template-columns: repeat(3, 1fr);
+                justify-content: center;
+                
                 @include responsive(tab-land) {
                     font-size: 1.6rem;
                 }
-
-                &__crossed {
-                    color: rgba($color-text, .7);
+                
+                &__weight {
+                    color: $color-text;
                     font-weight: 300;
-                    margin-right: 5px;
-                    text-decoration: line-through;
                 }
 
                 &__price {
                     color: $color-black;
-                    font-weight: 500;
+                    justify-self: flex-start;
+                    font-size: 1.5rem;
+                    font-weight: 600;
+                }
+
+                &__quantity {
+                    background: rgba($color-black, .05);
+                    border: none;
+                    border-radius: 7.5px;
+                    box-shadow: 
+                    2px 2px 3px 0 rgba(0, 0, 0, 0.1) inset,
+                    -2px -2px 3px 0 rgba(255, 255, 255, .5) inset;
+                    margin-left: auto;
+                    padding: 5px 0;
+                    text-align: center;
+                    width: 50px;
                 }
             }
+
         }
     }
 
