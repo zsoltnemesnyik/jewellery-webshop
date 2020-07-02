@@ -19,7 +19,7 @@
 
     // HEADER BOTTOM
     &-bottom {
-        background: $color-white;
+        background: rgba($color-black, .8);
         border-bottom: 1px solid rgba($color-black, .1);
         padding: 1rem 0;
         position: relative;
@@ -36,7 +36,7 @@
             }
 
             &__icon {
-                background: $color-black;
+                background: rgba($color-white, .8);
                 display: block;
                 height: 2px;
                 position: absolute;
@@ -46,7 +46,7 @@
                 
                 &::after,
                 &::before {
-                    background: $color-black;
+                    background: rgba($color-white, .8);
                     content: '';
                     display: block;
                     height: 2px;
@@ -109,13 +109,14 @@
             
             &__logo {
                 height: 40px;
-                margin-right: 10px;
+                margin-right: 20px;
                 width: auto;
             }
             
             &__title {
+                color: rgba($color-white, .9);
                 font-size: 2rem;
-                font-weight: 500;
+                font-weight: 400;
                 width: max-content;
                 
                 @include responsive(tab-land) {
@@ -162,7 +163,7 @@
             }
 
             &__link {
-                color: $color-text;
+                color: $color-black;
                 cursor: pointer;
                 display: block;
                 font-size: 2rem;
@@ -173,6 +174,7 @@
                 z-index: 1;
 
                 @include responsive(tab-land) {
+                    color: $color-white;
                     display: block;
                     font-size: 1.2rem;
                     padding: 0;
@@ -180,7 +182,7 @@
                 }
 
                 &::after {
-                    background: $color-text;
+                    background: $color-black;
                     bottom: -3px;
                     content: '';
                     display: block;
@@ -190,6 +192,10 @@
                     transform: translateX(-50%) scaleX(0);
                     transition: all .3s;
                     width: 80%;
+
+                    @include responsive(tab-land) {
+                        background: $color-white;
+                    }
             }
             
             &:hover{
@@ -205,8 +211,8 @@
         }
 
         &__icon {
-            color: $color-black;
-            font-size: 2.5rem;
+            color: $color-white;
+            font-size: 3rem;
             position: relative;
         }
     }
