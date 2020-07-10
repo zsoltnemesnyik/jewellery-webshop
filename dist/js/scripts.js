@@ -258,8 +258,6 @@ $(document).ready(function() {
         let productImage = $('#image'+productID).attr('src');
         let action = 'add';
 
-        console.log(productID, productName, productPrice, productQuantity, productImage, action);
-
         if (productQuantity > 0) {
             $.ajax({
                 url: './includes/action.php',
@@ -281,12 +279,6 @@ $(document).ready(function() {
                     setTimeout(() => {
                         $('.badge').removeClass('added');
                     }, 1500);
-                },
-                error: function (xhr, status, errorThrown) {
-                    console.log(xhr);
-                    console.log(status);
-                    console.log(errorThrown);
-                    $('.container').html(xhr.responseText);
                 }
             });
         } else {
@@ -313,12 +305,6 @@ $(document).ready(function() {
                     setTimeout(() => {
                         $('.badge').removeClass('added');
                     }, 1500);
-                },
-                error: function (xhr, status, errorThrown) {
-                    console.log(xhr);
-                    console.log(status);
-                    console.log(errorThrown);
-                    $('.container').html(xhr.responseText);
                 }
             })
         } else {

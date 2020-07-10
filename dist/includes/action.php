@@ -92,6 +92,11 @@
         }
 
         $orderTable .= '
+                <form action="./pages/cart.php" method="post">
+                    <h3 class="cart-details__comment">Leave additional comment:</h3>
+                    <textarea name="comment" rows="3" class="cart-details__comment-text"></textarea>
+                    <input type="submit" name="place_order" class="cart-details__order-btn" value="Send Order">
+                </form>
             </div>
         ';
 
