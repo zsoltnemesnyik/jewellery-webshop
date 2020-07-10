@@ -1,22 +1,21 @@
 <?php
-    session_start();
-    $connection = mysqli_connect('localhost', 'root', '', 'jewelry');
+    require '../includes/connection.php';
 
     if (filter_input(INPUT_POST, 'productID')) {
         $orderTable = '';
         $message = '';
-        
-        if(filter_input(INPUT_POST, 'action') === 'add') {
-            if(isset($_SESSION['shoping_cart'])) {
+
+        if (filter_input(INPUT_POST, 'action') === 'add') {
+            if (isset($_SESSION['shopping_cart'])) {
                 $is_available = 0;
-                
+
                 foreach($_SESSION['shopping_cart'] as $keys => $values) {
                     if($_SESSION['shopping_cart'][$keys]['productID'] === filter_input(INPUT_POST, 'productID')) {
                         $is_available++;
                         $_SESSION['shopping_cart'][$keys]['productQuantity'] = $_SESSION['shopping_cart'][$keys]['productQuantity'] + filter_input(INPUT_POST, 'productQuantity');
                     }
                 }
-                
+
                 if ($is_available < 1) {
                     $item_array = [
                         'productID'         =>      filter_input(INPUT_POST, 'productID'),
@@ -36,7 +35,7 @@
                     'productImage'      =>      filter_input(INPUT_POST, 'productImage')
                 ];
                 $_SESSION['shopping_cart'][] = $item_array;
-            }   
+            }
         }
 
         if(filter_input(INPUT_POST, 'action') === 'remove') {
@@ -54,16 +53,16 @@
                 }
             }
         }
-        
+
         $orderTable .= '
             <h3 class="cart-details__title">Your Cart</h3>
             <div class="items">
         ';
-        
+
         if (!empty($_SESSION['shopping_cart'])) {
             $total = 0;
-            
-            foreach ($_SESSION['shopping_cart'] as $keys => $values) {
+
+            foreach($_SESSION['shopping_cart'] as $keys => $values) {
                 $orderTable .= '
                     <div class="item">
                         <div class="item__image">
@@ -82,7 +81,7 @@
                 ';
                 $total = $total + ($values['productQuantity'] * $values['productPrice']);
             }
-            
+
             $orderTable .= '
                 </div>
                 <h3 class="cart-details__total">
@@ -91,13 +90,11 @@
                 </h3>
             ';
         }
+
         $orderTable .= '
-            <form action="./includes/cart.php" method="post">
-                <h3 class="cart-details__comment">Leave additional comment:</h3>
-                <textarea name="comment" rows="3" class="cart-details__comment-text"></textarea>
-                <input type="submit" name="place_order" class="cart-details__order-btn" value="Send Order">
-            </form>
+            </div>
         ';
+
         $output = [
             'orderTable'        => $orderTable,
             'cartItem'          => count($_SESSION['shopping_cart'])

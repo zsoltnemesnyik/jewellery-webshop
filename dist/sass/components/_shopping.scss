@@ -1,10 +1,4 @@
 .shopping {
-    padding-top: 15rem;
-
-    @include responsive(desktop) {
-        padding-top: 13rem;
-    }
-
     .container {
         flex-direction: column;
     }
@@ -167,23 +161,26 @@
         z-index: 0;
 
         .stock {
-            color: $color-white;
-            padding: 0 30px 0 15px;
+            left: -40px;
             position: absolute;
-            top: 1.5rem;
-            transform: skewY(-40deg);
+            top: 30px;
+            transform: rotate(-45deg);
+            width: auto;
             
-            &--warning {
+            &--warning::before {
                 background: #ff9900;
             }
             
-            &--error {
+            &--error::before {
                 background: #cc0000;
             }
             
-            &__text {
+            &::before {
+                color: $color-white;
+                content: attr(data-stock);
                 font-size: 1rem;
                 font-weight: 300;
+                padding: 0 50px;
             }
         }
      
@@ -280,7 +277,7 @@
                     font-size: 1.6rem;
                 }
                 
-                &__weight {
+                &__availability {
                     color: $color-text;
                     font-weight: 300;
                 }

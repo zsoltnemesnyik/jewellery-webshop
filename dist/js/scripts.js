@@ -12,7 +12,7 @@ var domController = (function($) {
     });
 
     // Toggle shopping-cart on click
-    $('body').on('click', '.header-bottom__icon', function() {
+    $('body').on('click', '.header__icon', function() {
         $('.cart').toggleClass('visible');        
 
         $('.cart__close-btn').on('click', function() {
@@ -130,136 +130,139 @@ var calcController = (function($) {
 var Controller = (function($, domCtrl, calcCtrl) {
     let state, selectedSortOption, selectedFilterOption, items;
 
-        // 1.) Initialization
-            // Empty the items list in the DOM
-            // domCtrl.emptyItems();
+        // // 1.) Initialization
+        //     // Empty the items list in the DOM
+        //     domCtrl.emptyItems();
 
-            // 2.) Init state variable to default values
-            state = calcCtrl.init();
+        //     // 2.) Init state variable to default values
+        //     // state = calcCtrl.init();
         
-        // 2.) Make default request
-        $.getJSON('https://cors-anywhere.herokuapp.com/https://www.nemesnyikzsolt.hu/products.json', function(items){
-            // security check if item's data is in correct format and doesn't contain harmful code
-            items = $.map(items, function(el) {
-                if (!isNaN(el.best_price) && !isNaN(el.full_price) && typeof el.description == 'string' && typeof el.title == 'string') {
-                    Object.keys(el).forEach((key) => {
-                        el[key] = calcCtrl.stripTags(el[key]);
-                });
+        // // 2.) Make default request
+        // $.getJSON('https://cors-anywhere.herokuapp.com/https://www.nemesnyikzsolt.hu/products.json', function(items){
+        //     // security check if item's data is in correct format and doesn't contain harmful code
+        //     items = $.map(items, function(el) {
+        //         if (!isNaN(el.best_price) && !isNaN(el.full_price) && typeof el.description == 'string' && typeof el.title == 'string') {
+        //             Object.keys(el).forEach((key) => {
+        //                 el[key] = calcCtrl.stripTags(el[key]);
+        //         });
 
-                    $.each(el, function(val) {
-                        el.best_price = parseFloat(el[val]);
-                    })
+        //             $.each(el, function(val) {
+        //                 el.best_price = parseFloat(el[val]);
+        //             })
 
-                    return el
-                }
-            });
+        //             return el
+        //         }
+        //     });
 
-            // Check if page is refreshed
-            if (sessionStorage.length != 0) {
-                state.modArr = JSON.parse(sessionStorage.getItem('state')).modArr;
-                state.order = JSON.parse(sessionStorage.getItem('state')).order;
-                state.material = JSON.parse(sessionStorage.getItem('state')).material;
-                state.filtered = JSON.parse(sessionStorage.getItem('state')).filtered;
-                state.sorted = JSON.parse(sessionStorage.getItem('state')).sorted;
+        //     // Check if page is refreshed
+        //     if (sessionStorage.length != 0) {
+        //         state.modArr = JSON.parse(sessionStorage.getItem('state')).modArr;
+        //         state.order = JSON.parse(sessionStorage.getItem('state')).order;
+        //         state.material = JSON.parse(sessionStorage.getItem('state')).material;
+        //         state.filtered = JSON.parse(sessionStorage.getItem('state')).filtered;
+        //         state.sorted = JSON.parse(sessionStorage.getItem('state')).sorted;
                 
-                if (state.order != 'default') {
-                    domCtrl.toggleSelAttr('.select-sort__option', state.order);
-                }
+        //         if (state.order != 'default') {
+        //             domCtrl.toggleSelAttr('.select-sort__option', state.order);
+        //         }
     
-                if (state.material != 'default') {
-                    domCtrl.toggleSelAttr('.select-filter__option', state.material);
-                }
+        //         if (state.material != 'default') {
+        //             domCtrl.toggleSelAttr('.select-filter__option', state.material);
+        //         }
 
-                // domCtrl.displayItemsResultsDescriptions(state.modArr);
-            } else {
-                // domCtrl.displayItemsResultsDescriptions(items);
-            }
+        //         // domCtrl.displayItemsResultsDescriptions(state.modArr);
+        //     } else {
+        //         // domCtrl.displayItemsResultsDescriptions(items);
+        //     }
             
-            // Sort the items on click, according to selected option's value
-            $('.select-sort').on('change', function() {
-                // 1.) Toggle selected attribute on click
-                selectedSortOption = domCtrl.toggleSelAttr('.select-sort__option', $(this).val());
+        //     // Sort the items on click, according to selected option's value
+        //     $('.select-sort').on('change', function() {
+        //         // 1.) Toggle selected attribute on click
+        //         selectedSortOption = domCtrl.toggleSelAttr('.select-sort__option', $(this).val());
 
-                // 2.) Check if the sort option is set to default and if the items are filtered
-                if (selectedSortOption == 'default') {
-                    state.filtered != false ? state.modArr =  calcCtrl.filterArray(items, state.material, 'material') : state.modArr = items;
+        //         // 2.) Check if the sort option is set to default and if the items are filtered
+        //         if (selectedSortOption == 'default') {
+        //             state.filtered != false ? state.modArr =  calcCtrl.filterArray(items, state.material, 'material') : state.modArr = items;
 
-                // Check if the items are already filtered
-                } else if (state.filtered != false) {
-                    // Sort the items
-                    state.modArr = calcCtrl.sortArray(state.modArr, 'best_price', selectedSortOption);
+        //         // Check if the items are already filtered
+        //         } else if (state.filtered != false) {
+        //             // Sort the items
+        //             state.modArr = calcCtrl.sortArray(state.modArr, 'best_price', selectedSortOption);
 
-                } else {
-                    state.modArr = calcCtrl.sortArray(items, 'best_price', selectedSortOption);
-                }
+        //         } else {
+        //             state.modArr = calcCtrl.sortArray(items, 'best_price', selectedSortOption);
+        //         }
                 
-                // 3.) Empty the itemlist and display the sorted items
-                domCtrl.emptyItems();
-                domCtrl.displayItemsResultsDescriptions(state.modArr);
+        //         // 3.) Empty the itemlist and display the sorted items
+        //         domCtrl.emptyItems();
+        //         domCtrl.displayItemsResultsDescriptions(state.modArr);
 
-                //. 4) Update the state object
-                state = {
-                    order: selectedSortOption,
-                    material: state.material,
-                    modArr: state.modArr,
-                    sorted: selectedSortOption == 'default' ? false : true,
-                    filtered: state.filtered
-                }
+        //         //. 4) Update the state object
+        //         state = {
+        //             order: selectedSortOption,
+        //             material: state.material,
+        //             modArr: state.modArr,
+        //             sorted: selectedSortOption == 'default' ? false : true,
+        //             filtered: state.filtered
+        //         }
 
-                // 6.) Push the state into sessionStorage
-                sessionStorage.setItem('state', JSON.stringify(state));
-            });
+        //         // 6.) Push the state into sessionStorage
+        //         sessionStorage.setItem('state', JSON.stringify(state));
+        //     });
 
-            // Filter the items on click, according to selected option's value
-            $('.select-filter').on('change', function() {
-                // 1.) Toggle selected attribute on click
-                selectedFilterOption = domCtrl.toggleSelAttr('.select-filter__option', $(this).val());
+        //     // Filter the items on click, according to selected option's value
+        //     $('.select-filter').on('change', function() {
+        //         // 1.) Toggle selected attribute on click
+        //         selectedFilterOption = domCtrl.toggleSelAttr('.select-filter__option', $(this).val());
 
-                // 2.) Check if the filter option is set to default and the array is sorted
-                if (selectedFilterOption == 'default') {
-                    state.sorted != false ? state.modArr = calcCtrl.sortArray(items, 'best_price', state.order) : state.modArr = items;
+        //         // 2.) Check if the filter option is set to default and the array is sorted
+        //         if (selectedFilterOption == 'default') {
+        //             state.sorted != false ? state.modArr = calcCtrl.sortArray(items, 'best_price', state.order) : state.modArr = items;
 
-                // Check if the items are already sorted
-                } else if (state.sorted != false) {
-                    // Calculate the sorted items
-                    // Filter the sorted items
-                    state.modArr = calcCtrl.filterArray(calcCtrl.sortArray(items, 'best_price', state.order), selectedFilterOption, 'material');
+        //         // Check if the items are already sorted
+        //         } else if (state.sorted != false) {
+        //             // Calculate the sorted items
+        //             // Filter the sorted items
+        //             state.modArr = calcCtrl.filterArray(calcCtrl.sortArray(items, 'best_price', state.order), selectedFilterOption, 'material');
 
-                } else {
-                    state.modArr = calcCtrl.filterArray(items, selectedFilterOption, 'material');
-                }
+        //         } else {
+        //             state.modArr = calcCtrl.filterArray(items, selectedFilterOption, 'material');
+        //         }
 
-                // 3.) Empty the itemlist and display the sorted items
-                domCtrl.emptyItems();
-                domCtrl.displayItemsResultsDescriptions(state.modArr);
+        //         // 3.) Empty the itemlist and display the sorted items
+        //         domCtrl.emptyItems();
+        //         domCtrl.displayItemsResultsDescriptions(state.modArr);
 
-                //. 4) Update the state object
-                state = {
-                    order: state.order,
-                    material: selectedFilterOption,
-                    modArr: state.modArr,
-                    sorted: state.sorted,
-                    filtered: selectedFilterOption == 'default' ? false : true
-                }
+        //         //. 4) Update the state object
+        //         state = {
+        //             order: state.order,
+        //             material: selectedFilterOption,
+        //             modArr: state.modArr,
+        //             sorted: state.sorted,
+        //             filtered: selectedFilterOption == 'default' ? false : true
+        //         }
 
-                // 5.) Push the state into sessionStorage
-                sessionStorage.setItem('state', JSON.stringify(state));
-            })
-        });
+        //         // 5.) Push the state into sessionStorage
+        //         sessionStorage.setItem('state', JSON.stringify(state));
+        //     })
+        // });
 }(jQuery, domController, calcController));
 
-$(document).ready(function(){  
-    $('.corner').click(function(){  
-        let productID = $(this).attr("id");  
-        let productName = $('#name'+productID).val();  
-        let productPrice = $('#price'+productID).val();  
-        let productQuantity = $('#quantity'+productID).val();  
-        let productImage = $('#image-'+productID).attr('src');
-        let action = "add";  
-        if(productQuantity > 0)  
-        {  
-            $.ajax({  
-                url:"./includes/action.php",  
+$(document).ready(function() {
+    // add to cart
+    $('.corner').on('click', function() {
+        let productID = $(this).attr('id');
+        let productName = $('#name' + productID).val();
+        let productPrice = $('#price' + productID).val();
+        let productQuantity = $('#quantity' + productID).val();
+        let productImage = $('#image'+productID).attr('src');
+        let action = 'add';
+
+        console.log(productID, productName, productPrice, productQuantity, productImage, action);
+
+        if (productQuantity > 0) {
+            $.ajax({
+                url: './includes/action.php',
                 method:"POST",  
                 dataType:"json",  
                 data:{  
@@ -274,36 +277,52 @@ $(document).ready(function(){
                     $('.cart-details').html(data['orderTable']);  
                     $('.badge').text(data['cartItem']);
 
-                    alert("Item added to cart");
-                }  
-            });  
-        }  
-        else  
-        {  
-            alert("Please Enter Number of Quantity");
-        }  
+                    $('.badge').addClass('added');
+                    setTimeout(() => {
+                        $('.badge').removeClass('added');
+                    }, 1500);
+                },
+                error: function (xhr, status, errorThrown) {
+                    console.log(xhr);
+                    console.log(status);
+                    console.log(errorThrown);
+                    $('.container').html(xhr.responseText);
+                }
+            });
+        } else {
+            alert('Quantity must be greater than 0!');
+        }
     });
 
+    // delete from cart
     $(document).on('click', '.item__delete', function() {
         let productID = $(this).attr('id');
         let action = 'remove';
 
-        if(confirm('Are you sure you want to remove this product?')) {
+        if(confirm('Are you sure you really want to remove this product?')) {
             $.ajax({
                 url: './includes/action.php',
-                method: 'POST',
-                dataType: 'json',
-                data: {
-                    productID: productID,
-                    action: action
-                },
-                success: function(data) {
-                    $('.cart-details').html(data['orderTable']);
+                method:"POST",  
+                dataType:"json",  
+                data: {productID: productID, action: action},
+                success:function(data) {
+                    $('.cart-details').html(data['orderTable']);  
                     $('.badge').text(data['cartItem']);
+
+                    $('.badge').addClass('added');
+                    setTimeout(() => {
+                        $('.badge').removeClass('added');
+                    }, 1500);
+                },
+                error: function (xhr, status, errorThrown) {
+                    console.log(xhr);
+                    console.log(status);
+                    console.log(errorThrown);
+                    $('.container').html(xhr.responseText);
                 }
-            });
+            })
         } else {
-            return false;
+            return false
         }
     });
 
@@ -311,8 +330,6 @@ $(document).ready(function(){
         let productID = $(this).data('product-id');
         let productQuantity = $(this).val();
         let action = 'quantity_change';
-
-        console.log('teszt');
         if (productQuantity != '') {
             $.ajax({
                 url: './includes/action.php',

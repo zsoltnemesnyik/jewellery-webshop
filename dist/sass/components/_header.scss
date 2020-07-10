@@ -1,219 +1,199 @@
 .header {
+    background: rgba($color-black, .8);
+    padding: 1rem 0;
     position: fixed;
     width: 100%;
     z-index: 1;
 
-    // HEADER TOP
-    &-top {
-        background: $color-black;
-
-        &__promo-text {
-            color: $color-white;
-            letter-spacing: 1px;
-            margin: 0 auto;
-            padding: 1rem;
-            text-align: center;
-            text-transform: uppercase;
-        }
-    }
-
-    // HEADER BOTTOM
-    &-bottom {
-        background: rgba($color-black, .8);
-        border-bottom: 1px solid rgba($color-black, .1);
-        padding: 1rem 0;
+    // HAMBURGER ICON
+    .mobile-nav {
+        cursor: pointer;
+        height: 40px;
         position: relative;
+        width: 40px;
 
-        // HAMBURGER ICON
-        .mobile-nav {
-            cursor: pointer;
-            height: 40px;
-            position: relative;
-            width: 40px;
-
-            @include responsive(tab-land) {
-                display: none;
-            }
-
-            &__icon {
-                background: rgba($color-white, .8);
-                display: block;
-                height: 2px;
-                position: absolute;
-                top: 50%;
-                transform: translateY(-50%);
-                width: 100%;
-                
-                &::after,
-                &::before {
-                    background: rgba($color-white, .8);
-                    content: '';
-                    display: block;
-                    height: 2px;
-                    position: absolute;
-                    transition: all .3s;
-                    width: 100%;
-                }
-
-                &::before {
-                    top: -12.5px;
-                }
-
-                &::after {
-                    top: 12.5px;
-                }
-            }
-
-            &:hover {
-                .mobile-nav__icon {
-                    &::before {
-                        top: -15px;
-                    }
-    
-                    &::after {
-                        top: 15px;
-                    }
-                }
-
-            }
-
-            // HAMBURGER ICON OPEN
-            &.crossed {
-                .mobile-nav__icon {
-                    visibility: hidden;
-
-                    &::after,
-                    &::before {
-                        top: 0;
-                        visibility: visible;
-                    }
-
-                    &::after {
-                        transform: rotate(-45deg);
-                    }
-
-                    &::before {
-                        transform: rotate(45deg);
-                    }
-                }
-            }
-        }
-
-        .brand {
-            width: auto;
-            @include flexCenter;
-
-            @include responsive(tab-land) {
-                margin: 0;
-            }
-            
-            &__logo {
-                height: 40px;
-                margin-right: 20px;
-                width: auto;
-            }
-            
-            &__title {
-                color: rgba($color-white, .9);
-                font-size: 2rem;
-                font-weight: 400;
-                width: max-content;
-                
-                @include responsive(tab-land) {
-                    font-size: 1.5rem;
-                }
-            }
-        }
-
-        .navigation {
-            @include flexCenter;
-            background: rgba($color-white, 1);
-            box-shadow: 0 10px 10px rgba($color-black, .75);
-            height: calc(100vh - 100%);
-            left: -100%;
-            position: absolute;
-            text-align: center;
-            top: calc(100% + 1px);
-            transition: left .5s;
-            width: 70%;
-
-            @include responsive(tab-land) {
-                all: unset;
-                width: 100%;
-            }
-
-            &__menu {
-                width: 100%;
-
-                @include responsive(tab-land) {
-                    display: flex;
-                    justify-content: space-evenly;
-                    margin-left: auto;
-                    width: 90%;
-                }
-
-                @include responsive(desktop) {
-                    width: 80%;
-                }
-            }
-
-            &__item {
-                list-style: none;
-                position: relative;
-            }
-
-            &__link {
-                color: $color-black;
-                cursor: pointer;
-                display: block;
-                font-size: 2rem;
-                padding: 1.5rem 0;
-                position: relative;
-                text-decoration: none;
-                transition: all .3s;
-                z-index: 1;
-
-                @include responsive(tab-land) {
-                    color: $color-white;
-                    display: block;
-                    font-size: 1.2rem;
-                    padding: 0;
-                    position: unset;
-                }
-
-                &::after {
-                    background: $color-black;
-                    bottom: -3px;
-                    content: '';
-                    display: block;
-                    height: 1px;
-                    left: 50%;
-                    position: absolute;
-                    transform: translateX(-50%) scaleX(0);
-                    transition: all .3s;
-                    width: 80%;
-
-                    @include responsive(tab-land) {
-                        background: $color-white;
-                    }
-            }
-            
-            &:hover{
-                &::after {
-                    transform: translateX(-50%) scaleX(1);
-                    }
-                }
-            }
-        }
-
-        .navigation.open {
-            left: 0;
+        @include responsive(tab-land) {
+            display: none;
         }
 
         &__icon {
-            color: $color-white;
-            font-size: 3rem;
+            background: rgba($color-white, .8);
+            display: block;
+            height: 2px;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            
+            &::after,
+            &::before {
+                background: rgba($color-white, .8);
+                content: '';
+                display: block;
+                height: 2px;
+                position: absolute;
+                transition: all .3s;
+                width: 100%;
+            }
+
+            &::before {
+                top: -12.5px;
+            }
+
+            &::after {
+                top: 12.5px;
+            }
+        }
+
+        &:hover {
+            .mobile-nav__icon {
+                &::before {
+                    top: -15px;
+                }
+
+                &::after {
+                    top: 15px;
+                }
+            }
+
+        }
+
+        // HAMBURGER ICON OPEN
+        &.crossed {
+            .mobile-nav__icon {
+                visibility: hidden;
+
+                &::after,
+                &::before {
+                    top: 0;
+                    visibility: visible;
+                }
+
+                &::after {
+                    transform: rotate(-45deg);
+                }
+
+                &::before {
+                    transform: rotate(45deg);
+                }
+            }
+        }
+    }
+
+    .brand {
+        width: auto;
+        @include flexCenter;
+
+        @include responsive(tab-land) {
+            margin: 0;
+        }
+        
+        &__logo {
+            height: 40px;
+            margin-right: 20px;
+            width: auto;
+        }
+        
+        &__title {
+            color: rgba($color-white, .9);
+            font-size: 2rem;
+            font-weight: 400;
+            width: max-content;
+            
+            @include responsive(tab-land) {
+                font-size: 1.5rem;
+            }
+        }
+    }
+
+    .navigation {
+        @include flexCenter;
+        background: rgba($color-white, 1);
+        box-shadow: 0 10px 10px rgba($color-black, .75);
+        height: calc(100vh - 100%);
+        left: -100%;
+        position: absolute;
+        text-align: center;
+        top: calc(100% + 1px);
+        transition: left .5s;
+        width: 70%;
+
+        @include responsive(tab-land) {
+            all: unset;
+            width: 100%;
+        }
+
+        &__menu {
+            width: 100%;
+
+            @include responsive(tab-land) {
+                display: flex;
+                justify-content: space-evenly;
+                margin-left: auto;
+                width: 90%;
+            }
+
+            @include responsive(desktop) {
+                width: 80%;
+            }
+        }
+
+        &__item {
+            list-style: none;
             position: relative;
         }
+
+        &__link {
+            color: $color-black;
+            cursor: pointer;
+            display: block;
+            font-size: 2rem;
+            padding: 1.5rem 0;
+            position: relative;
+            text-decoration: none;
+            transition: all .3s;
+            z-index: 1;
+
+            @include responsive(tab-land) {
+                color: $color-white;
+                display: block;
+                font-size: 1.2rem;
+                padding: 0;
+                position: unset;
+            }
+
+            &::after {
+                background: $color-black;
+                bottom: -3px;
+                content: '';
+                display: block;
+                height: 1px;
+                left: 50%;
+                position: absolute;
+                transform: translateX(-50%) scaleX(0);
+                transition: all .3s;
+                width: 80%;
+
+                @include responsive(tab-land) {
+                    background: $color-white;
+                }
+        }
+        
+        &:hover{
+            &::after {
+                transform: translateX(-50%) scaleX(1);
+                }
+            }
+        }
+    }
+
+    .navigation.open {
+        left: 0;
+    }
+
+    &__icon {
+        color: $color-white;
+        font-size: 3rem;
+        position: relative;
     }
 }

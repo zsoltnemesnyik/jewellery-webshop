@@ -35,7 +35,17 @@ html {
 }
 
 .container--fluid {
+    max-width: 100%;
+    
     @include responsive(tab-port) {
-        max-width: 100%;
+        max-width: 95%;
+    }
+}
+
+main {
+    padding-top: 15rem;
+
+    @include responsive(desktop) {
+        padding-top: 13rem;
     }
 }

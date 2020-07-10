@@ -19,6 +19,10 @@
         bottom: -.05em;
         left: -.75em;
     }
+
+    &.added {
+        animation: bounce 1s forwards;
+    }
 }
 
 .cart {
