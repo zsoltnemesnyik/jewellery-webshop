@@ -18,19 +18,20 @@ html {
     @include flexCenter;
     justify-content: space-between;
     margin: 0 auto;
-    max-width: 100%;
+    width: 100%;
     padding: 0 15px;
 
     @include responsive(tab-port) {
-        max-width: 85%;
+        width: 85%;
     }
 
     @include responsive(tab-land) {
-        max-width: 87.5%;
+        width: 87.5%;
     }
 
     @include responsive(desktop) {
-        max-width: 90%;
+        max-width: 1140px;
+        width: 90%;
     }
 }
 
@@ -43,9 +44,5 @@ html {
 }
 
 main {
-    padding-top: 15rem;
-
-    @include responsive(desktop) {
-        padding-top: 13rem;
-    }
+    padding-top: 10rem;
 }

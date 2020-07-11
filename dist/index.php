@@ -44,20 +44,33 @@
 						while ($row = mysqli_fetch_array($result)) {
 					?>
 					<div class="shopping-box">
-						<!-- <div class="stock stock--warning" data-stock="low-stock"></div> -->
-						<div class="corner" id="<?php echo $row["product_id"];?>">
-							<i class="fas fa-cart-plus"></i>
-						</div>
-						<img src="./img/<?php echo $row['product_image'];?>" id="image<?php echo $row['product_id']?>" alt="Jewellery image" class="shopping-box__image">
+						<?php 
+							$productAvailability = true;
+							if($row['product_availability'] == 0) {
+								$productAvailability = false;
+								echo '<div class="stock stock--error" data-stock="out of stock"></div>';
+							} else if($row['product_availability'] > 0 && $row['product_availability'] <= 5) {
+								echo '<div class="stock stock--warning" data-stock="low stock"></div>';
+							}
+						?>
+
+						<?php if($productAvailability) {?>
+							<div class="corner" id="<?php echo $row["product_id"];?>">
+								<i class="fas fa-cart-plus"></i>
+							</div>
+						<?php
+							}
+						?>
+						<img src="./img/<?php echo $row['product_image'];?>" id="image<?php echo $row['product_id']?>" alt="Jewellery image" class="shopping-box__image <?php if(!$productAvailability) {echo 'shopping-box__image--error';}?>">
 						<div class="box-details">
 							<p class="box-details__title">
 								<?php echo substr($row['product_title'], 0, 40) . '...'?>
 								<span class="tooltiptext"><?php echo $row['product_title']?></span>
 							</p>
 							<div class="box-details-specs">
-								<h6 class="box-details-specs__weight"><?php echo $row['product_weight']?>gr</h6>
+								<h6 class="box-details-specs__availability"><?php echo $row['product_availability']?>pcs left</h6>
+								<input type="number" id="quantity<?php echo $row['product_id']?>" class="box-details-specs__quantity" value="1" max="<?php echo $row['product_availability']?>" min="1">
 								<h6 class="box-details-specs__price"><?php echo number_format($row['product_price-best'], 2)?>$</h6>
-								<input type="number" id="quantity<?php echo $row['product_id']?>" class="box-details-specs__quantity" value="1">
 								<input type="hidden" name="hidden_name" id="name<?php echo $row['product_id']?>" value="<?php echo $row['product_title']?>">
 								<input type="hidden" name="hidden_price" id="price<?php echo $row['product_id'];?>" value="<?php echo $row['product_price-best'];?>">
 							</div>
