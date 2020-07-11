@@ -13,7 +13,7 @@ var domController = (function($) {
 
     // Toggle shopping-cart on click
     $('body').on('click', '.header__icon', function() {
-        $('.cart').toggleClass('visible');        
+        $('.cart').toggleClass('visible');    
 
         $('.cart__close-btn').on('click', function() {
             $('.cart').removeClass('visible');
@@ -255,6 +255,7 @@ $(document).ready(function() {
         let productName = $('#name' + productID).val();
         let productPrice = $('#price' + productID).val();
         let productQuantity = $('#quantity' + productID).val();
+        let productMax = $('#quantity' + productID).attr('max');
         let productImage = $('#image'+productID).attr('src');
         let action = 'add';
 
@@ -269,6 +270,7 @@ $(document).ready(function() {
                     productPrice: productPrice,   
                     productQuantity: productQuantity,
                     productImage: productImage,
+                    productMax: productMax,
                     action: action  
                 },  
                 success:function(data) {

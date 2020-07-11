@@ -30,16 +30,18 @@ include '../includes/connection.php';
                               $order_details = "";  
                               foreach($_SESSION["shopping_cart"] as $keys => $values)  
                               {  
-                                   $order_details .= "  
+                                   $order_details .= "
                                    INSERT INTO order_details(order_id, product_name, product_price, product_quantity)  
-                                   VALUES('".$order_id."', '".$values["productName"]."', '".$values["productPrice"]."', '".$values["productQuantity"]."');  
-                                   ";  
+                                   VALUES('".$order_id."', '".$values["productName"]."', '".$values["productPrice"]."', '".$values["productQuantity"]."');
+                                   UPDATE products SET product_availability=product_availability-". $_SESSION['shopping_cart'][$keys]['productQuantity'] ." WHERE product_id=" . $_SESSION['shopping_cart'][$keys]['productID'] . ";
+                                   ";
                               }  
                               if(mysqli_multi_query($connection, $order_details))  
                               {  
                                    unset($_SESSION["shopping_cart"]);  
                                    echo '<script>alert("You have successfully place an order...Thank you")</script>';  
                                    echo '<script>window.location.href="../dist/pages/cart.php"</script>';  
+                                   var_dump($_SESSION['shopping_cart']);
                               }  
                          }  
                          if(isset($_SESSION["order_id"]))  
@@ -65,7 +67,7 @@ include '../includes/connection.php';
                                    <p class="details__customer-data">'.$row["person_phone"].', '.$row["person_address"].'</p>
                                    ';  
                                    $order_details .= "
-                                        <p>".$row["product_name"]."</p>  
+                                        <p class='details__order-data details__order-data--product-name'>".$row["product_name"]."</p>  
                                         <p>".$row["product_quantity"]."</p>  
                                         <p>".number_format($row["product_price"], 2)."</p>  
                                         <p>".number_format($row["product_quantity"] * $row["product_price"], 2)."</p>

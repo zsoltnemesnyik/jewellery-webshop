@@ -69,7 +69,7 @@
 							</p>
 							<div class="box-details-specs">
 								<h6 class="box-details-specs__availability"><?php echo $row['product_availability']?>pcs left</h6>
-								<input type="number" id="quantity<?php echo $row['product_id']?>" class="box-details-specs__quantity" value="1" max="<?php echo $row['product_availability']?>" min="1">
+								<input type="number" id="quantity<?php echo $row['product_id']?>" class="box-details-specs__quantity" max="<?php echo $row['product_availability']?>" <?php if(!$productAvailability) {echo 'value="0" disabled';} else {echo 'min="1" value="1"';}?>>
 								<h6 class="box-details-specs__price"><?php echo number_format($row['product_price-best'], 2)?>$</h6>
 								<input type="hidden" name="hidden_name" id="name<?php echo $row['product_id']?>" value="<?php echo $row['product_title']?>">
 								<input type="hidden" name="hidden_price" id="price<?php echo $row['product_id'];?>" value="<?php echo $row['product_price-best'];?>">
@@ -100,7 +100,7 @@
                                 </div>
                                 <div class="item__details">
                                     <h3 class="item__name"><?php echo $values['productName'];?></h3>
-                                    <input type="number" name="quantity[]" id="quantity<?php echo $values['productID'];?>" value="<?php echo $values['productQuantity'];?>" data-product-id="<?php echo $values['productID']?>" class="quantity">
+                                    <input type="number" name="quantity[]" id="quantity<?php echo $values['productID'];?>" value="<?php echo $values['productQuantity'];?>" data-product-id="<?php echo $values['productID']?>" class="quantity" min="1" max="<?php echo $values['productMax']?>">
                                     <h3 class="item__price"><?php echo $values['productPrice'];?>$</h3>
                                     <h3 class="item__price"><?php echo number_format($values['productQuantity'] * $values['productPrice'], 2);?>$</h3>
                                 	<button name="delete" class="item__delete" id="<?php echo $values['productID'];?>">

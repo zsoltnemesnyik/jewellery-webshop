@@ -22,7 +22,8 @@
                         'productName'       =>      filter_input(INPUT_POST, 'productName'),
                         'productPrice'      =>      filter_input(INPUT_POST, 'productPrice'),
                         'productQuantity'   =>      filter_input(INPUT_POST, 'productQuantity'),
-                        'productImage'      =>      filter_input(INPUT_POST, 'productImage')
+                        'productImage'      =>      filter_input(INPUT_POST, 'productImage'),
+                        'productMax'      =>      filter_input(INPUT_POST, 'productMax')
                     ];
                     $_SESSION['shopping_cart'][] = $item_array;
                 }
@@ -32,7 +33,8 @@
                     'productName'       =>      filter_input(INPUT_POST, 'productName'),
                     'productPrice'      =>      filter_input(INPUT_POST, 'productPrice'),
                     'productQuantity'   =>      filter_input(INPUT_POST, 'productQuantity'),
-                    'productImage'      =>      filter_input(INPUT_POST, 'productImage')
+                    'productImage'      =>      filter_input(INPUT_POST, 'productImage'),
+                    'productMax'      =>      filter_input(INPUT_POST, 'productMax')
                 ];
                 $_SESSION['shopping_cart'][] = $item_array;
             }
@@ -70,7 +72,7 @@
                         </div>
                         <div class="item__details">
                             <h3 class="item__name">' . $values['productName'] . '</h3>
-                            <input type="number" name="quantity[]" id="quantity' . $values['productID'] . '" value="' . $values['productQuantity'] . '" data-product-id="' . $values['productID'] . '" class="quantity">
+                            <input type="number" name="quantity[]" id="quantity' . $values['productID'] . '" value="' . $values['productQuantity'] . '" data-product-id="' . $values['productID'] . '" class="quantity" min="1" max="' . $values['productMax'] . '">
                             <h3 class="item__price">' . $values['productPrice'] . '$</h3>
                             <h3 class="item__price">' . number_format($values['productQuantity'] * $values['productPrice'], 2) . '$</h3>
                             <button name="delete" class="item__delete" id="' . $values['productID'] . '">
