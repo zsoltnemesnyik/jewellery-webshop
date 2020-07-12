@@ -255,6 +255,7 @@ $(document).ready(function() {
         let productName = $('#name' + productID).val();
         let productPrice = $('#price' + productID).val();
         let productQuantity = $('#quantity' + productID).val();
+        let productAvailability = $('#availability' + productID);
         let productMax = $('#quantity' + productID).attr('max');
         let productImage = $('#image'+productID).attr('src');
         let action = 'add';
@@ -276,6 +277,7 @@ $(document).ready(function() {
                 success:function(data) {
                     $('.cart-details').html(data['orderTable']);  
                     $('.badge').text(data['cartItem']);
+                    productAvailability.text(productAvailability.text() - $('#quantity'+productID).val());
 
                     $('.badge').addClass('added');
                     setTimeout(() => {

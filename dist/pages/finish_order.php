@@ -1,8 +1,9 @@
-<?php  
+<?php
 include '../includes/connection.php';
-?>  
 
-<!DOCTYPE html>  
+if(isset($_SESSION['order_id'])) {
+?>
+<!DOCTYPE html>
 <html>  
      <head>  
           <title>Order Finished</title>
@@ -14,38 +15,7 @@ include '../includes/connection.php';
           <main>
                <section class="finish-order">
                     <div class="container">  
-                         <?php  
-                         if(isset($_POST["place_order"]))  
-                         {  
-                              $insert_order = "  
-                              INSERT INTO orders(order_person_id, order_date, order_status)  
-                              VALUES('1', '".date('Y-m-d')."', 'pending')  
-                              ";  
-                              $order_id = "";  
-                              if(mysqli_query($connection, $insert_order))  
-                              {  
-                                   $order_id = mysqli_insert_id($connection);  
-                              }  
-                              $_SESSION["order_id"] = $order_id;  
-                              $order_details = "";  
-                              foreach($_SESSION["shopping_cart"] as $keys => $values)  
-                              {  
-                                   $order_details .= "
-                                   INSERT INTO order_details(order_id, product_name, product_price, product_quantity)  
-                                   VALUES('".$order_id."', '".$values["productName"]."', '".$values["productPrice"]."', '".$values["productQuantity"]."');
-                                   UPDATE products SET product_availability=product_availability-". $_SESSION['shopping_cart'][$keys]['productQuantity'] ." WHERE product_id=" . $_SESSION['shopping_cart'][$keys]['productID'] . ";
-                                   ";
-                              }  
-                              if(mysqli_multi_query($connection, $order_details))  
-                              {  
-                                   unset($_SESSION["shopping_cart"]);  
-                                   echo '<script>alert("You have successfully place an order...Thank you")</script>';  
-                                   echo '<script>window.location.href="../dist/pages/cart.php"</script>';  
-                                   var_dump($_SESSION['shopping_cart']);
-                              }  
-                         }  
-                         if(isset($_SESSION["order_id"]))  
-                         {  
+                         <?php
                               $customer_details = '';  
                               $order_details = '';  
                               $total = 0;  
@@ -62,9 +32,10 @@ include '../includes/connection.php';
                               {  
                                    $customer_details = '  
                                    <p class="details__customer-data">'.$row["person_name"].'</p>
+                                   <p class="details__customer-data">'.$row["person_phone"].'</p>  
                                    <p class="details__customer-data">'.$row["person_email"].'</p>
-                                   <p class="details__customer-data">'.$row["person_email"].'</p>  
-                                   <p class="details__customer-data">'.$row["person_phone"].', '.$row["person_address"].'</p>
+                                   <p class="details__customer-data">'.$row["person_city"] . ', ' . $row["person_country"] .'</p>
+                                   <p class="details__customer-data">'.$row["person_zip"] . ', ' . $row["person_address"] .'</p>
                                    ';  
                                    $order_details .= "
                                         <p class='details__order-data details__order-data--product-name'>".$row["product_name"]."</p>  
@@ -98,11 +69,23 @@ include '../includes/connection.php';
                                         </div>
                                    </div>
                               </div>
-                              ';  
-                         }  
-                         ?>  
+                              ';
+
+                              unset($_SESSION['shopping_cart']);
+                              unset($_SESSION['order_id']);
+                              
+                         ?>
+                         <a href="../dist/index.php" class="finish-order__back">Back to the Main Page</a>
                     </div>  
                </section>
           </main>
-     </body>  
-</html> 
+          <?php include '../includes/footer.php';?>
+          <script>
+               $('.badge').text(0);
+          </script>
+     </body>
+</html>
+<?php
+} else {
+     echo 'You have no right to access this page!';
+}
