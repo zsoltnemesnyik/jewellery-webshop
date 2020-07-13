@@ -23,7 +23,8 @@
                         'productPrice'      =>      filter_input(INPUT_POST, 'productPrice'),
                         'productQuantity'   =>      filter_input(INPUT_POST, 'productQuantity'),
                         'productImage'      =>      filter_input(INPUT_POST, 'productImage'),
-                        'productMax'      =>      filter_input(INPUT_POST, 'productMax')
+                        'productMax'      =>      filter_input(INPUT_POST, 'productMax'),
+                        'productAvailability'   => filter_input(INPUT_POST, 'productAvailability')
                     ];
                     $_SESSION['shopping_cart'][] = $item_array;
                 }
@@ -34,7 +35,8 @@
                     'productPrice'      =>      filter_input(INPUT_POST, 'productPrice'),
                     'productQuantity'   =>      filter_input(INPUT_POST, 'productQuantity'),
                     'productImage'      =>      filter_input(INPUT_POST, 'productImage'),
-                    'productMax'      =>      filter_input(INPUT_POST, 'productMax')
+                    'productMax'      =>      filter_input(INPUT_POST, 'productMax'),
+                    'productAvailability'   => filter_input(INPUT_POST, 'productAvailability')
                 ];
                 $_SESSION['shopping_cart'][] = $item_array;
             }

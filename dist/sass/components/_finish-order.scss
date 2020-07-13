@@ -25,7 +25,7 @@
         width: 100%;
         
         @include responsive(tab-port) {
-            grid-template-columns: minmax(max-content, 1fr) auto;
+            grid-template-columns: minmax(20rem, .8fr) min-content;
             justify-content: space-between;
             text-align: unset;
         }
@@ -39,11 +39,20 @@
             &-data {
                 text-indent: .75rem;
             }
+
+            &-label--message {
+                padding-top: 1rem;
+            }
         }
 
         &__logo {
+            order: -1;
             text-align: center;
             
+            @include responsive(tab-port) {
+                order: unset;
+            }
+
             img {
                 height: auto;
                 max-width: 8rem;
@@ -88,6 +97,7 @@
             grid-template-columns: repeat(2, 1fr);
             justify-items: center;
             margin-top: 2rem;
+            padding-top: 1rem;
             width: 100%;
 
             &__label {

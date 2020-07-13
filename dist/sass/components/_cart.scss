@@ -36,7 +36,7 @@
     opacity: 0;
     overflow: hidden;
     position: fixed;
-    top: 50%;
+    top: calc(50% + 65px/2);
     transform: translate(-50%, -50%);
     transition: all .3s;
     visibility: hidden;
@@ -44,13 +44,14 @@
     z-index: 10;
     
     @include responsive(tab-port) {
-        height: unset;
+        top: calc(50% + 73px/2);
         width: 65vmin;
     }
     
     @include responsive(tab-land) {
         grid-template-columns: 2fr 1fr;
-        top: calc(50% + 127px/2);
+        height: unset;
+        top: calc(50% + 78px/2);
         width: 80%;
     }
 
@@ -94,7 +95,7 @@
 
     .items {
         margin-bottom: 1.5rem;
-        max-height: 40vmin;
+        max-height: 10rem;
         overflow-y: scroll;
         
         @include responsive(tab-land) {
@@ -107,11 +108,12 @@
         display: grid;
         grid-template-columns: auto 1fr;
         margin-right: 2rem;
-        padding: 2rem 0;
+        padding: 1rem 0;
         position: relative;
         
         @include responsive(tab-port) {
             margin: 0 1.5rem;
+            padding: 2rem 0;
         }
         
         &:not(:last-of-type)::after {
@@ -219,8 +221,11 @@
 
     &__title {
         font-size: 1.5rem;
-        margin-bottom: 2rem;
         text-align: center;
+        
+        @include responsive(tab-land) {
+            margin-bottom: 2rem;
+        }
     }
 
     &__text {

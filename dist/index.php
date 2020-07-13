@@ -70,13 +70,13 @@
 								<span class="tooltiptext"><?php echo $row['product_title']?></span>
 							</p>
 							<div class="box-details-specs">
-								<h6 class="box-details-specs__availability" id="availability<?php echo $row['product_id']?>"><?php echo $row['product_availability']?></h6>
+								<h6 class="box-details-specs__availability"><span class="box-details-specs__available-number" id="availability<?php echo $row['product_id']?>"><?php echo $row['product_availability']?></span>pcs left</h6>
 								<?php if(!$productAvailability) {?>
 									<input type="text" id="quantity<?php echo $row['product_id']?>" class="box-details-specs__quantity" <?php echo 'value="0" disabled';?>>
 								<?php 
 								} else {
 								?>
-								<input type="number" id="quantity<?php echo $row['product_id']?>" class="box-details-specs__quantity" max="<?php echo $row['product_availability']?>" <?php echo 'min="1" value="1"';?>>
+								<input type="number" id="quantity<?php echo $row['product_id']?>" class="box-details-specs__quantity" max="<?php echo $row['product_availability']?>" <?php echo 'min="1" value="0"';?>>
 								<?php } ?>
 								<h6 class="box-details-specs__price"><?php echo number_format($row['product_price-best'], 2)?>$</h6>
 								<input type="hidden" name="hidden_name" id="name<?php echo $row['product_id']?>" value="<?php echo $row['product_title']?>">
@@ -126,8 +126,6 @@
                             Total:
                             <span class="cart-details__total cart-details__total--value"><?php if (isset($total)) {echo number_format($total, 2);} else {echo '0';}?>$</span>
                         </h3>
-                        <?php
-                        ?>
                         <form action="./includes/send_order.php" method="post">
                             <h3 class="cart-details__comment">Leave additional comment:</h3>
                             <textarea name="comment" rows="3" class="cart-details__comment-text"></textarea>
@@ -154,6 +152,6 @@
 		</section>
 	</main>
 	<?php include './includes/footer.php';?>
-	<script src="js/scripts.js"></script>
+	<script src="js/scripts.js" type="module"></script>
 </body>
 </html>
