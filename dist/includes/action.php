@@ -12,7 +12,7 @@
                 foreach($_SESSION['shopping_cart'] as $keys => $values) {
                     if($_SESSION['shopping_cart'][$keys]['productID'] === filter_input(INPUT_POST, 'productID')) {
                         $is_available++;
-                        $_SESSION['shopping_cart'][$keys]['productQuantity'] = $_SESSION['shopping_cart'][$keys]['productQuantity'] + filter_input(INPUT_POST, 'productQuantity');
+                        // $_SESSION['shopping_cart'][$keys]['productQuantity'] = $_SESSION['shopping_cart'][$keys]['productQuantity'] + filter_input(INPUT_POST, 'productQuantity');
                     }
                 }
 
@@ -59,7 +59,6 @@
         }
 
         $orderTable .= '
-            <h3 class="cart-details__title">Your Cart</h3>
             <div class="items">
         ';
 
@@ -73,8 +72,9 @@
                             <img src="' . $values['productImage'] . '" alt="Cart image">
                         </div>
                         <div class="item__details">
+                            <h3 class="item__error" data-quantity-error="   ' . $values['productID'] . '">Error message</h3>
                             <h3 class="item__name">' . $values['productName'] . '</h3>
-                            <input type="number" name="quantity[]" id="quantity' . $values['productID'] . '" value="' . $values['productQuantity'] . '" data-product-id="' . $values['productID'] . '" class="quantity" min="1" max="' . $values['productMax'] . '">
+                            <input type="number" name="quantity[]" id="delete-quantity' . $values['productID'] . '" value="' . $values['productQuantity'] . '" data-product-id="' . $values['productID'] . '" class="quantity" min="1" max="' . $values['productMax'] . '">
                             <h3 class="item__price">' . $values['productPrice'] . '$</h3>
                             <h3 class="item__price">' . number_format($values['productQuantity'] * $values['productPrice'], 2) . '$</h3>
                             <button name="delete" class="item__delete" id="' . $values['productID'] . '">
@@ -92,17 +92,9 @@
                     Total:
                     <span class="cart-details__total cart-details__total--value">' . number_format($total, 2) . '$</span>
                 </h3>
+            </div>
             ';
         }
-
-        $orderTable .= '
-                <form action="./includes/send_order.php" method="post">
-                    <h3 class="cart-details__comment">Leave additional comment:</h3>
-                    <textarea name="comment" rows="3" class="cart-details__comment-text"></textarea>
-                    <input type="submit" name="place_order" class="cart-details__order-btn" value="Send Order">
-                </form>
-            </div>
-        ';
 
         $output = [
             'orderTable'        => $orderTable,

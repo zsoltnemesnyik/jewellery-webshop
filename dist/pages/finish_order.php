@@ -85,6 +85,7 @@ if(isset($_SESSION['order_id'])) {
           <?php include '../includes/footer.php';?>
           <script>
                $('.badge').text(0);
+               alert('You have successfully placed your order!')
           </script>
      </body>
 </html>

@@ -76,13 +76,17 @@ var Controller = (function($) {
         let productID = $(this).attr('id');
         let productName = $('#name' + productID).val();
         let productPrice = $('#price' + productID).val();
-        let productQuantity = $('#quantity' + productID).val();
-        let productAvailability = $('#availability' + productID);
+        let productQuantity = parseInt($('#quantity' + productID).val());
+        let productAvailability = parseInt($('#availability' + productID).text());
         let productMax = $('#quantity' + productID).attr('max');
         let productImage = $('#image'+productID).attr('src');
         let action = 'add';
-
-        if (productQuantity > 0) {
+        
+        if (productQuantity > productAvailability) {
+            alert('Cannot buy more than what is available!')
+        } else if(productQuantity == 0) {
+            alert('Please select a number greater than ZERO!');
+        } else {
             $.ajax({
                 url: './includes/action.php',
                 method:"POST",  
@@ -94,14 +98,12 @@ var Controller = (function($) {
                     productQuantity: productQuantity,
                     productImage: productImage,
                     productMax: productMax,
-                    productAvailability: productAvailability.text(),
+                    productAvailability: productAvailability,
                     action: action  
                 },  
                 success:function(data) {
-                    console.log(data);
-                    $('.cart-details').html(data['orderTable']);  
+                    $('.cart-details__order').html(data['orderTable']);  
                     $('.badge').text(data['cartItem']);
-                    productAvailability.text(productAvailability.text() - $('#quantity'+productID).val());
 
                     $('.badge').addClass('added');
                     setTimeout(() => {
@@ -109,14 +111,13 @@ var Controller = (function($) {
                     }, 750);
                 }
             });
-        } else {
-            alert('Quantity must be greater than 0!');
         }
     });
 
     // delete from cart
     $(document).on('click', '.item__delete', function() {
         let productID = $(this).attr('id');
+        let productAvailability = parseInt($('#availability' + productID).text());
         let action = 'remove';
 
         if(confirm('Are you sure you really want to remove this product?')) {
@@ -124,9 +125,9 @@ var Controller = (function($) {
                 url: './includes/action.php',
                 method:"POST",  
                 dataType:"json",  
-                data: {productID: productID, action: action},
+                data: {productID: productID, productAvailability: productAvailability, action: action},
                 success:function(data) {
-                    $('.cart-details').html(data['orderTable']);  
+                    $('.cart-details__order').html(data['orderTable']);  
                     $('.badge').text(data['cartItem']);
 
                     $('.badge').addClass('added');
@@ -155,11 +156,47 @@ var Controller = (function($) {
                     action: action
                 },
                 success: function(data) {
-                    $('.cart-details').html(data['orderTable']);
+                    $('.cart-details__order').html(data['orderTable']);
                 }
             });
         }
-    })
+    });
+
+    $('#send').on('click', function() {
+        let comment = $('.cart-details__comment-text').val();
+        let action = 'send_order';
+
+        if($('.items')[0].childElementCount !== 0) {
+            if(confirm('Do you really want to send your order?')) {
+                $.ajax({
+                    url: './includes/send_order.php',
+                    method: 'POST',
+                    dataType: 'json',
+                    data: {
+                        comment: comment,
+                        action: action
+                    },
+                    success: function(data) {
+                        console.log(data);
+                        $.map(data['errors'], (key, value) => {
+                            $(`.item__error[data-quantity-error="${value}"]`).toggleClass('display');
+                            $(`.item__error[data-quantity-error="${value}"]`).text(`${key}`);
+                        });
+                        
+                        if (data === 'order_success') {
+                            window.location.href="../dist/pages/finish_order.php";
+                        }
+                    },
+                    error: function(data) {
+                        console.log(data);
+                        console.log('hiba');
+                    }
+                });
+            } else {
+                return false
+            }
+        }
+    });
     
 }(jQuery));
 //     // let state, selectedSortOption, selectedFilterOption, items;

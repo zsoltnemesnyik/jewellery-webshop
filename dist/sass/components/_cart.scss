@@ -148,12 +148,25 @@
             justify-items: center;
         }
 
+        &__error {
+            color: #ff0000;
+            display: none;
+            font-size: 1rem;
+            font-weight: 500;
+            grid-column: 1/-1;
+            justify-self: start;
+
+            &.display {
+                display: inline-block;
+            }
+        }
+
         &__name {
             align-self: flex-start;
             font-size: 10px;
             font-weight: 400;
             grid-column: 1/-1;
-            justify-self: flex-start;
+            justify-self: start;
         }
 
         .quantity {

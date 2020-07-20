@@ -48,7 +48,7 @@
 					<div class="shopping-box">
 						<?php 
 							$productAvailability = true;
-							if($row['product_availability'] == 0) {
+							if($row['product_availability'] <= 0) {
 								$productAvailability = false;
 								echo '<div class="stock stock--error" data-stock="out of stock"></div>';
 							} else if($row['product_availability'] > 0 && $row['product_availability'] <= 5) {
@@ -96,40 +96,44 @@
 					<i class="fas fa-times cart__close-btn"></i>
 					<div class="cart-details">
                         <h3 class="cart-details__title">Your Cart</h3>
-                        <div class="items">
-                            <?php
-                            if(!empty($_SESSION['shopping_cart'])) {
-                                $total = 0;
-                                foreach ($_SESSION['shopping_cart'] as $keys => $values) {
-                            ?>
-                            <div class="item">
-                                <div class="item__image">
-                                    <img src="<?php echo $values['productImage']?>" alt="Cart image">
-                                </div>
-                                <div class="item__details">
-                                    <h3 class="item__name"><?php echo $values['productName'];?></h3>
-                                    <input type="number" name="quantity[]" id="quantity<?php echo $values['productID'];?>" value="<?php echo $values['productQuantity'];?>" data-product-id="<?php echo $values['productID']?>" class="quantity" min="1" max="<?php echo $values['productMax']?>">
-                                    <h3 class="item__price"><?php echo $values['productPrice'];?>$</h3>
-                                    <h3 class="item__price"><?php echo number_format($values['productQuantity'] * $values['productPrice'], 2);?>$</h3>
-                                	<button name="delete" class="item__delete" id="<?php echo $values['productID'];?>">
-                                    <i class="fas fa-times-circle"></i>
-                                </button>
-                                </div>
-                            </div>
-                            <?php
-                                $total = $total + ($values['productQuantity'] * $values['productPrice']);
-                            	}
-							}
-                            ?>
-                        </div>
-                        <h3 class="cart-details__total">
-                            Total:
-                            <span class="cart-details__total cart-details__total--value"><?php if (isset($total)) {echo number_format($total, 2);} else {echo '0';}?>$</span>
-                        </h3>
-                        <form action="./includes/send_order.php" method="post">
+						<div class="cart-details__order">
+							<div class="items">
+								<?php
+								if(!empty($_SESSION['shopping_cart'])) {
+									$total = 0;
+									foreach ($_SESSION['shopping_cart'] as $keys => $values) {
+								?>
+								<div class="item">
+									<div class="item__image">
+										<img src="<?php echo $values['productImage']?>" alt="Cart image">
+									</div>
+									<div class="item__details">
+										<h3 class="item__error" data-quantity-error="<?php echo $values['productID'];?>">Error message</h3>
+										<h3 class="item__name"><?php echo $values['productName'];?></h3>
+										<input type="number" name="quantity[]" value="<?php echo $values['productQuantity'];?>" data-product-id="<?php echo $values['productID']?>" class="quantity" min="1" max="<?php echo $values['productMax']?>">
+										<h3 class="item__price"><?php echo $values['productPrice'];?>$</h3>
+										<h3 class="item__price"><?php echo number_format($values['productQuantity'] * $values['productPrice'], 2);?>$</h3>
+										<button name="delete" class="item__delete" id="<?php echo $values['productID'];?>">
+										<i class="fas fa-times-circle"></i>
+									</button>
+									</div>
+								</div>
+								<?php
+									$total = $total + ($values['productQuantity'] * $values['productPrice']);
+									}
+								}
+								?>
+							</div>
+							<h3 class="cart-details__total">
+								Total:
+								<span class="cart-details__total cart-details__total--value"><?php if (isset($total)) {echo number_format($total, 2);} else {echo '0';}?>$</span>
+							</h3>
+						</div>
+                        <!-- <form action="./includes/send_order.php" method="post"> -->
+                        <form id="sendOrder" method="post">
                             <h3 class="cart-details__comment">Leave additional comment:</h3>
                             <textarea name="comment" rows="3" class="cart-details__comment-text"></textarea>
-                            <input type="submit" name="place_order" class="cart-details__order-btn" value="Send Order">
+                            <input type="button" name="place_order" class="cart-details__order-btn" id="send" value="Send Order">
                         </form>
                     </div>
 					<div class="cart-billing">
