@@ -72,7 +72,7 @@
                             <img src="' . $values['productImage'] . '" alt="Cart image">
                         </div>
                         <div class="item__details">
-                            <h3 class="item__error" data-quantity-error="   ' . $values['productID'] . '">Error message</h3>
+                            <h3 class="item__error" data-quantity-error="' . $values['productID'] . '">Error message</h3>
                             <h3 class="item__name">' . $values['productName'] . '</h3>
                             <input type="number" name="quantity[]" id="delete-quantity' . $values['productID'] . '" value="' . $values['productQuantity'] . '" data-product-id="' . $values['productID'] . '" class="quantity" min="1" max="' . $values['productMax'] . '">
                             <h3 class="item__price">' . $values['productPrice'] . '$</h3>
