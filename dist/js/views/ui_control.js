@@ -8,9 +8,11 @@ export const resizeItemDisplay = () => {
 }
 
 export const toggleShoppingCart = () => {
-    $('.cart').toggleClass('visible');    
-
-    $('.cart__close-btn').on('click', function() {
+    $('.cart').toggleClass('visible'); 
+    $('.cart-overlay').toggleClass('visible'); 
+    
+    $('.cart__close-btn, .cart-overlay').on('click', function() {
         $('.cart').removeClass('visible');
+        $('.cart-overlay').removeClass('visible'); 
     });
 }

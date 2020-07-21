@@ -89,9 +89,7 @@
 					?>
 				</div>
 
-				<div class="popup-overlay"></div>
-				<div class="shopping__popup"></div>
-						
+				<div class="cart-overlay"></div>						
 				<div class="cart">
 					<i class="fas fa-times cart__close-btn"></i>
 					<div class="cart-details">
@@ -129,27 +127,38 @@
 								<span class="cart-details__total cart-details__total--value"><?php if (isset($total)) {echo number_format($total, 2);} else {echo '0';}?>$</span>
 							</h3>
 						</div>
-                        <!-- <form action="./includes/send_order.php" method="post"> -->
-                        <form id="sendOrder" method="post">
-                            <h3 class="cart-details__comment">Leave additional comment:</h3>
-                            <textarea name="comment" rows="3" class="cart-details__comment-text"></textarea>
-                            <input type="button" name="place_order" class="cart-details__order-btn" id="send" value="Send Order">
-                        </form>
                     </div>
 					<div class="cart-billing">
 						<h3 class="cart-billing__title">Billing Informations</h3>
-						<p class="cart-billing__text cart-billing__text--name">
-							<span class="cart-billing__text cart-billing__text--highlighted">Name:</span>Text
-						</p>
-						<p class="cart-billing__text cart-billing__text--phone">
-							<span class="cart-billing__text cart-billing__text--highlighted">Phone:</span>Text
-						</p>
-						<p class="cart-billing__text cart-billing__text--email">
-							<span class="cart-billing__text cart-billing__text--highlighted">Email:</span>Text
-						</p>
-						<p class="cart-billing__text cart-billing__text--address">
-							<span class="cart-billing__text cart-billing__text--highlighted">Address:</span>Text
-						</p>
+						<form id="sendOrder" method="post">
+							<div class="form-group">
+								<label for="name" class="form-group__label">Name *</label>
+								<span class="form-group__error">&nbsp;</span>
+								<input type="text" name="name" id="name" class="form-group__input form-group__input--name" placeholder="Your name!">
+							</div>
+							<div class="form-group">
+								<label for="email" class="form-group__label">Email *</label>
+								<span class="form-group__error">&nbsp;</span>
+								<input type="email" name="email" id="email" class="form-group__input form-group__input--email" placeholder="Your email!">
+							</div>
+							<div class="form-group">
+								<label for="phone" class="form-group__label">Phone number *</label>
+								<span class="form-group__error">&nbsp;</span>
+								<input type="text" name="phone" id="phone" class="form-group__input form-group__input--phone" placeholder="Your phone number">
+							</div>
+							<div class="form-group">
+								<label for="address" class="form-group__label">Address *</label>
+								<span class="form-group__error">&nbsp;</span>
+								<input type="text" name="address" id="address" class="form-group__input form-group__input--address" placeholder="Your address">
+							</div>
+							<div class="form-group form-group--comment">
+								<label for="comment" class="form-group__label">Leave additional comment:</label>
+								<textarea name="comment" id="comment" rows="3" class="form-group__input form-group__input--textarea"></textarea>
+							</div>
+							<div class="form-group form-group--submit">
+								<input type="button" name="place_order" class="form-group__input form-group__input form-group__input form-group__input--submit" id="send" value="Send Order">
+							</div>
+                        </form>
 					</div>
 				</div>
 			</div>
