@@ -134,7 +134,7 @@
             grid-template-columns: repeat(3, 1fr);
         }
 
-        @include responsive(desktop) {
+        @include responsive(xl) {
             grid-template-columns: repeat(4, 1fr);
         }
 
@@ -312,87 +312,6 @@
                 }
             }
 
-        }
-    }
-
-    .popup-overlay {
-        background: rgba($color-black, .6);
-        height: 100vh;
-        opacity: 0;
-        position: fixed;
-        top: 0;
-        transition: all .5s;
-        visibility: hidden;
-        width: 100vw;
-        z-index: 1;
-
-        &.visible {
-            opacity: 1;
-            transition: all .5s;
-            visibility: visible;
-
-            & ~ .shopping__popup {
-                opacity: 1;
-                visibility: visible;
-            }
-        }
-    }
-
-    .shopping__popup {
-        background: $color-white;
-        border-radius: 10px;
-        @include flexCenter;
-        flex-direction: column;
-        height: auto;
-        justify-content: space-between;
-        left: 50%;
-        max-width: 35rem;
-        opacity: 0;
-        padding: 50px 30px 30px;
-        position: fixed;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        transition: all .5s;
-        visibility: hidden;
-        width: 85vw;
-        z-index: 1;
-
-        &-close {
-            cursor: pointer;
-            position: absolute;
-            right: 10px;
-            top: 5px;
-
-            i {
-                color: $color-black;
-                font-size: 3rem;
-                transition: all .3s ease-in-out;
-            }
-
-            &:hover i {
-                transform: scale(1.3);
-            }
-        }
-
-        &-text {
-            align-self: flex-start;
-            justify-self: start;
-            font-size: 1.5rem;
-            margin-bottom: 3rem;
-        }
-
-        &-btn {
-            background: $color-black;
-            color: $color-white;
-            cursor: pointer;
-            font-size: 2rem;
-            padding: .5rem 3rem;
-            text-decoration: none;
-            transition: all .4s;
-
-            &:hover {
-                text-decoration: underline;
-            }
         }
     }
 }

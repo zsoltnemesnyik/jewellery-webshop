@@ -138,7 +138,7 @@
                 width: 90%;
             }
 
-            @include responsive(desktop) {
+            @include responsive(xl) {
                 width: 80%;
             }
         }

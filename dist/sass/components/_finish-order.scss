@@ -32,9 +32,7 @@
         
 
         &__customer {
-            @include responsive(tab-port) {
-                margin-bottom: 3rem;
-            }
+            margin-bottom: 1rem;
 
             &-data {
                 text-indent: .75rem;
