@@ -1,8 +1,15 @@
 <?php
 require './connection.php';
 
+// check if action === send_order
 if(filter_input(INPUT_POST, 'action') === 'send_order') {
-     $orderComment = strip_tags(trim(filter_input(INPUT_POST, 'comment')));
+     // validate fields
+     $customerName = strip_tags(trim(filter_input(INPUT_POST, 'custName')));
+     $customerPhone = strip_tags(trim(filter_input(INPUT_POST, 'custPhone')));
+     $customerEmail = strip_tags(trim(filter_input(INPUT_POST, 'custEmail')));
+     $customerAddress = strip_tags(trim(filter_input(INPUT_POST, 'custAddress')));
+     $customerComment = strip_tags(trim(filter_input(INPUT_POST, 'custComment')));
+     
      $orderTotal = 0;
      $error = false;
      $cartMessages = [];
@@ -24,10 +31,14 @@ if(filter_input(INPUT_POST, 'action') === 'send_order') {
           echo json_encode($cartMessages);
           return;
      } else {
-          $insert_order = "INSERT INTO orders(order_person_id, order_date, order_status, order_total, order_comment) VALUES('1', '".date('Y-m-d')."', 'pending', '" . $orderTotal . "', '" . $orderComment . "')";  
+          $customer_id = "";
+          $order_id = "";
+
+          if(mysqli_query($connection, "INSERT INTO person(person_name, person_phone, person_email, person_address) values('" . $customerName . "', '" . $customerPhone . "', '" . $customerEmail . "', '" . $customerAddress . "')")) {  
+               $customer_id = mysqli_insert_id($connection);  
+          }
      
-          $order_id = "";  
-          if(mysqli_query($connection, $insert_order)) {  
+          if(mysqli_query($connection, "INSERT INTO orders(order_person_id, order_date, order_status, order_total, order_comment) VALUES('".$customer_id."','".date('Y-m-d')."', 'pending', '" . $orderTotal . "', '" . $customerComment . "')")) {  
                $order_id = mysqli_insert_id($connection);  
           }
      
@@ -37,9 +48,7 @@ if(filter_input(INPUT_POST, 'action') === 'send_order') {
                $order_details .= "
                INSERT INTO order_details(order_id, product_name, product_price, product_quantity)  
                VALUES('".$order_id."', '".$values["productName"]."', '".$values["productPrice"]."', '".$values["productQuantity"]."');
-               UPDATE products SET product_availability=product_availability-$values[productQuantity] WHERE product_id=$values[productID];
-               UPDATE person SET person_orders=person_orders+1 WHERE person_id=1;
-               ";
+               UPDATE products SET product_availability=product_availability-$values[productQuantity] WHERE product_id=$values[productID];";
           }
           
           if(mysqli_multi_query($connection, $order_details)) {
@@ -47,6 +56,8 @@ if(filter_input(INPUT_POST, 'action') === 'send_order') {
           }
      }
 } else {
-     echo 'You have no right to access this page!';
+     echo 'You have no right to access this page!
+     <br>
+     <a href="../index.php">Back to the Main Page</a>';
 }  
 ?>

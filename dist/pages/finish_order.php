@@ -34,8 +34,7 @@ if(isset($_SESSION['order_id'])) {
                                         <p class="details__customer-data">'.$row["person_name"].'</p>
                                         <p class="details__customer-data">'.$row["person_phone"].'</p>  
                                         <p class="details__customer-data">'.$row["person_email"].'</p>
-                                        <p class="details__customer-data">'.$row["person_city"] . ', ' . $row["person_country"] .'</p>
-                                        <p class="details__customer-data">'.$row["person_zip"] . ', ' . $row["person_address"] .'</p>
+                                        <p class="details__customer-data">' . $row["person_address"] . '</p>
                                    ';
                                    $orderMessage = '<p class="details__customer-data">'.$row["order_comment"].'</p>';
                                    $order_details .= "
@@ -91,5 +90,7 @@ if(isset($_SESSION['order_id'])) {
 </html>
 <?php
 } else {
-     echo 'You have no right to access this page!';
+     echo 'You have no right to access this page!
+     <br>
+     <a href="../index.php">Back to the Main Page</a>';
 }
