@@ -7,8 +7,12 @@
     @if $breakpoint == tab-land {
         @media  (min-width: 768px) { @content };
     }
-    
+
     @if $breakpoint == desktop {
+        @media  (min-width: 992px) { @content };
+    }
+    
+    @if $breakpoint == xl {
         @media  (min-width: 1280px) { @content };
     }
 }
