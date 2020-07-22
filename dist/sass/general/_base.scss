@@ -18,28 +18,12 @@ html {
     @include flexCenter;
     justify-content: space-between;
     margin: 0 auto;
-    width: 100%;
     padding: 0 15px;
-
-    @include responsive(tab-port) {
-        width: 85%;
-    }
+    width: 100%;
 
     @include responsive(tab-land) {
-        width: 87.5%;
-    }
-
-    @include responsive(desktop) {
         max-width: 1140px;
-        width: 90%;
-    }
-}
-
-.container--fluid {
-    max-width: 100%;
-    
-    @include responsive(tab-port) {
-        max-width: 95%;
+        width: 85%;
     }
 }
 

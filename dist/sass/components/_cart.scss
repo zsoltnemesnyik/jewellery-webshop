@@ -75,6 +75,8 @@
     }
 
     .cart-details {
+        display: grid;
+        grid-template-rows: auto 1fr;
         padding: 1rem 2rem;
     
         @include responsive(desktop) {
@@ -89,6 +91,11 @@
             @include responsive(tab-land) {
                 margin-bottom: 2rem;
             }
+        }
+
+        &__order {
+            display: grid;
+            grid-template-rows: 1fr auto;
         }
     
         .items {
@@ -105,12 +112,11 @@
             align-items: center;
             display: grid;
             grid-template-columns: auto 1fr;
-            margin-right: 2rem;
+            grid-column-gap: 1rem;
             padding: 1rem 0;
             position: relative;
             
             @include responsive(tab-port) {
-                margin: 0 1.5rem;
                 padding: 2rem 0;
             }
             
@@ -128,12 +134,15 @@
             &__image {
                 @include flexCenter;
                 height: 4rem;
-                margin: 0 2.5rem 0 1.5rem;
                 width: 4rem;
+                
+                @include responsive(tab-port) {
+                    margin: 0 2.5rem 0 1.5rem;
+                }
     
                 img {
-                    height: 100%;
-                    width: auto;
+                    height: auto;
+                    width: 100%;
                 }
             }
     
@@ -214,13 +223,9 @@
         }
     
         &__title {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             margin-bottom: 1rem;
             text-align: center;
-            
-            @include responsive(tab-land) {
-                margin-bottom: 0;
-            }
         }
     
         #sendOrder {
@@ -243,6 +248,22 @@
                 &--submit {
                     grid-column: 1/-1;
                 }
+
+                &__error {
+                    color: #ff0000;
+                    font-size: .8rem;
+                    font-weight: 500;
+                    grid-column: 2/-1;
+                    justify-self: end;
+                    opacity: 0;
+                    transition: .3s;
+                    visibility: hidden;
+        
+                    &.display {
+                        opacity: 1;
+                        visibility: visible;
+                    }
+                }
             }
     
             .form-group__label {
@@ -252,7 +273,7 @@
             }
             
             .form-group__input {
-                background: rgba($color-black, .05);
+                background: rgba($color-black, .01);
                 border: none;
                 border-radius: 7.5px;
                 box-shadow: 
