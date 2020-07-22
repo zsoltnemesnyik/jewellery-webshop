@@ -3,10 +3,6 @@ export const toggleMobileNav = () => {
     $('.navigation').toggleClass('open');
 };
 
-export const resizeItemDisplay = () => {
-    $('.shopping__items').toggleClass('resized');
-}
-
 export const toggleShoppingCart = () => {
     $('.cart').toggleClass('visible'); 
     $('.cart-overlay').toggleClass('visible'); 
@@ -15,4 +11,11 @@ export const toggleShoppingCart = () => {
         $('.cart').removeClass('visible');
         $('.cart-overlay').removeClass('visible'); 
     });
+}
+
+export const toggleSelectOption = (nodes, selNode) => {
+    nodes.removeAttr('selected');
+    selNode.attr('selected', 'selected');
+
+    return selNode.val()
 }

@@ -1,17 +1,16 @@
-import * as ui from './views/ui_control.js';
+import elements from './views/base.js';
+import * as ui_control from './views/ui_control.js';
+import * as formcheck from './modules/FormCheck.js';
 
 var Controller = (function($) {
     // Display the mobile nav icon and menu
-    $('.mobile-nav').on('click', ui.toggleMobileNav);
-
-    // Toggle view of items
-    $('body').on('click', '.shopping-info__resize', ui.resizeItemDisplay);
+    $('.mobile-nav').on('click', ui_control.toggleMobileNav);
 
     // Toggle shopping cart
-    $('body').on('click', '.header__icon', ui.toggleShoppingCart);
+    $('body').on('click', '.header__icon', ui_control.toggleShoppingCart);
     
     // add to cart
-    $('.corner').on('click', function() {
+    $('body').on('click', '.corner', function() {
         let productID = $(this).attr('id');
         let productName = $('#name' + productID).val();
         let productPrice = $('#price' + productID).val();
@@ -102,25 +101,27 @@ var Controller = (function($) {
     });
 
     $('#send').on('click', function() {
-        let custName = $('input[name=name]').val();
-        let custEmail = $('input[name=email]').val();
-        let custPhone = $('input[name=phone]').val();
-        let custAddress = $('input[name=address]').val();
-        let custComment = $('.form-group__input--textarea').val();
         let action = 'send_order';
 
-        if($('.items')[0].childElementCount !== 0) {
-            if(confirm('Do you really want to send your order?')) {
+        if($('.items')[0].childElementCount !== 0 && confirm('Do you really want to send your order?')) {
+            $(elements.inputFields).each((_key, value) => {
+                if($(value).val() === '') {
+                    formcheck.fieldValidate($(value), 'Field can\'t be empty', 'form-group__error display');
+                } else {
+                    formcheck.fieldValidate($(value), '&nbsp', 'form-group__error');
+                }
+            });
+            if (elements.custName.val() !== '' && elements.custEmail.val() !== '' && elements.custPhone.val() !== '' && elements.custAddress.val() !== '') {
                 $.ajax({
                     url: './includes/send_order.php',
                     method: 'POST',
                     dataType: 'json',
                     data: {
-                        custName: custName,
-                        custPhone: custPhone,
-                        custEmail: custEmail,
-                        custAddress: custAddress,
-                        custComment: custComment,
+                        custName: elements.custName.val(),
+                        custPhone: elements.custPhone.val(),
+                        custEmail: elements.custEmail.val(),
+                        custAddress: elements.custAddress.val(),
+                        custComment: elements.custComment.val(),
                         action: action
                     },
                     success: function(data) {
@@ -132,18 +133,43 @@ var Controller = (function($) {
                         if (data === 'order_success') {
                             window.location.href="../dist/pages/finish_order.php";
                         }
-                    },
-                    error: function(xhr, error, errorthrown) {
-                        console.log(xhr);
-                        console.log(error);
-                        console.log(errorthrown);
-                        console.log('hiba');
                     }
                 });
-            } else {
-                return false
             }
         }
     });
-    
+
+    // Change order of elements
+    $('.select-sort__option').on('keyup change click', (e) => {
+        let selectedOption = ui_control.toggleSelectOption($('.select-sort__option'), $(e.target));
+
+        $.ajax({
+            url: './includes/items.php',
+            method: 'POST',
+            dataType: 'json',
+            data: {
+                sort: selectedOption
+            },
+            success: function(data) {
+                $('.shopping__items').html(data);
+                // console.log(data);
+            }
+        });
+    });
+    $('.select-filter__option').on('keyup change click', (e) => {
+        let selectedOption = ui_control.toggleSelectOption($('.select-filter__option'), $(e.target));
+
+        $.ajax({
+            url: './includes/items.php',
+            method: 'POST',
+            dataType: 'json',
+            data: {
+                filter: selectedOption
+            },
+            success: function(data) {
+                $('.shopping__items').html(data);
+                // console.log(data);
+            }
+        });
+    });
 }(jQuery));

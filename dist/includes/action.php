@@ -1,6 +1,7 @@
 <?php
     require '../includes/connection.php';
 
+    
     if (filter_input(INPUT_POST, 'productID')) {
         $orderTable = '';
         $message = '';
@@ -12,7 +13,6 @@
                 foreach($_SESSION['shopping_cart'] as $keys => $values) {
                     if($_SESSION['shopping_cart'][$keys]['productID'] === filter_input(INPUT_POST, 'productID')) {
                         $is_available++;
-                        // $_SESSION['shopping_cart'][$keys]['productQuantity'] = $_SESSION['shopping_cart'][$keys]['productQuantity'] + filter_input(INPUT_POST, 'productQuantity');
                     }
                 }
 
