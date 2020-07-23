@@ -16,36 +16,33 @@
 	<main>
 		<section class="shopping">
 			<div class="container">
-				<h2 class="section-title" id="sectitle">Best Sellers</h2>
-
-				<div class="shopping-info">
-					<p class="shopping-info__results-number"></p>
-					<button class="shopping-info__resize">Resize</button>
-				</div>
-				<form class="shopping-form">
+				<h2 class="section-title">Best Sellers</h2>
+				<div class="shopping-form">
 					<div class="wrapper wrapper--sort">
-						<select data-native-menu="false" class="select-sort">
+						<select id="selectSort">
 							<option value="default" selected="selected" class="select-sort__option">Sort by</option>
 							<option value="asc" class="select-sort__option">Price Low to High</option>
 							<option value="desc" class="select-sort__option">Price High to Low</option>
 						</select>
 					</div>
 					<div class="wrapper wrapper--filter">
-						<select data-native-menu="false" class="select-filter">
+						<select id="selectFilter">
 							<option value="default" selected="selected" class="select-filter__option">Filters</option>
 							<option value="gold" class="select-filter__option">Gold</option>
 							<option value="silver" class="select-filter__option">Silver</option>
 						</select>
 					</div>
-				</form>
+				</div>
 				
+				<?php
+					$result = mysqli_query($connection, "SELECT * FROM products ORDER BY product_id ASC");
+					echo '<p class="shopping__results-number">' . mysqli_num_rows($result) . ' product(s)</p>'
+				?>
 				<div class="shopping__items">
 					<?php
-						$result = mysqli_query($connection, "SELECT * FROM products ORDER BY product_id ASC");
-
 						while ($row = mysqli_fetch_array($result)) {
 					?>
-					<div class="shopping-box">
+					<div class="shopping-box visible">
 						<?php 
 							$productAvailability = true;
 							if($row['product_availability'] <= 0) {
@@ -156,7 +153,7 @@
 								<textarea name="comment" id="comment" rows="3" class="form-group__input form-group__input--textarea"></textarea>
 							</div>
 							<div class="form-group form-group--submit">
-								<input type="button" name="place_order" class="form-group__input form-group__input form-group__input form-group__input--submit" id="send" value="Send Order">
+								<input type="button" name="place_order" class="form-group__input form-group__input--submit" id="send" value="Send Order">
 							</div>
                         </form>
 					</div>

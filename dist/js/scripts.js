@@ -144,6 +144,9 @@ var Controller = (function($) {
         let selectedOption = ui_control.toggleSelectOption($('.select-sort__option'), $(e.target));
 
         $.ajax({
+            beforeSend: function() {
+                $('.shopping-box').toggleClass('visible');
+            },
             url: './includes/items.php',
             method: 'POST',
             dataType: 'json',
@@ -151,7 +154,11 @@ var Controller = (function($) {
                 sort: selectedOption
             },
             success: function(data) {
-                $('.shopping__items').html(data);
+                $('.shopping__items').html(data['shoppingBox']);
+                $('.shopping__results-number').text(data['numResults'] + ' product(s)');
+                setTimeout(() => {
+                    $('.shopping-box').toggleClass('visible');
+                });
                 // console.log(data);
             }
         });
@@ -160,6 +167,9 @@ var Controller = (function($) {
         let selectedOption = ui_control.toggleSelectOption($('.select-filter__option'), $(e.target));
 
         $.ajax({
+            beforeSend: function() {
+                $('.shopping-box').toggleClass('visible');
+            },
             url: './includes/items.php',
             method: 'POST',
             dataType: 'json',
@@ -167,7 +177,11 @@ var Controller = (function($) {
                 filter: selectedOption
             },
             success: function(data) {
-                $('.shopping__items').html(data);
+                $('.shopping__items').html(data['shoppingBox']);
+                $('.shopping__results-number').text(data['numResults'] + ' product(s)');
+                setTimeout(() => {
+                    $('.shopping-box').toggleClass('visible');
+                });
                 // console.log(data);
             }
         });
