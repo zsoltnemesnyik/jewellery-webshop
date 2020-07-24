@@ -4,13 +4,27 @@
     $numResults = '';
     if (filter_input(INPUT_POST, 'sort')) {
         $sortOrder = filter_input(INPUT_POST, 'sort');
-        $result = mysqli_query($connection, "SELECT * FROM products ORDER BY `products`.`product_price-best` $sortOrder");
-        $numResults = mysqli_num_rows($result);
-    }
-    
-    if (filter_input(INPUT_POST, 'filter')) {
         $filterMaterial = filter_input(INPUT_POST, 'filter');
-        $result = mysqli_query($connection, "SELECT * FROM products WHERE product_material='$filterMaterial'");
+
+        if ($filterMaterial != '' && $filterMaterial != 'default' && $sortOrder != 'default') {
+            $result = mysqli_query($connection, "SELECT * FROM products WHERE product_material='$filterMaterial' ORDER BY `products`.`product_price-best` $sortOrder");  
+        } else if ($filterMaterial != '' && $filterMaterial != 'default' && $sortOrder == 'default') {
+            $result = mysqli_query($connection, "SELECT * FROM products WHERE product_material='$filterMaterial'");
+        } else if ($sortOrder === 'default') {
+            $result = mysqli_query($connection, "SELECT * FROM products ORDER BY product_id ASC");
+        } else {
+            $result = mysqli_query($connection, "SELECT * FROM products ORDER BY `products`.`product_price-best` $sortOrder");
+        }
+        $numResults = mysqli_num_rows($result);
+        
+    } else if (filter_input(INPUT_POST, 'filter')) {
+        $filterMaterial = filter_input(INPUT_POST, 'filter');
+
+        if ($filterMaterial === 'default') {
+            $result = mysqli_query($connection, "SELECT * FROM products ORDER BY product_id ASC");
+        } else {
+            $result = mysqli_query($connection, "SELECT * FROM products WHERE product_material='$filterMaterial'");
+        }
         $numResults = mysqli_num_rows($result);
     }
 

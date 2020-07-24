@@ -141,7 +141,8 @@ var Controller = (function($) {
 
     // Change order of elements
     $('.select-sort__option').on('keyup change click', (e) => {
-        let selectedOption = ui_control.toggleSelectOption($('.select-sort__option'), $(e.target));
+        let sortOption = ui_control.toggleSelectOption($('.select-sort__option'), $(e.target));
+        let filterOption = $('.select-filter__option[selected=selected]').val();
 
         $.ajax({
             beforeSend: function() {
@@ -151,7 +152,8 @@ var Controller = (function($) {
             method: 'POST',
             dataType: 'json',
             data: {
-                sort: selectedOption
+                sort: sortOption,
+                filter: filterOption
             },
             success: function(data) {
                 $('.shopping__items').html(data['shoppingBox']);
@@ -159,12 +161,12 @@ var Controller = (function($) {
                 setTimeout(() => {
                     $('.shopping-box').toggleClass('visible');
                 });
-                // console.log(data);
             }
         });
     });
     $('.select-filter__option').on('keyup change click', (e) => {
-        let selectedOption = ui_control.toggleSelectOption($('.select-filter__option'), $(e.target));
+        let filterOption = ui_control.toggleSelectOption($('.select-filter__option'), $(e.target));
+        let sortOption = $('.select-sort__option[selected=selected]').val();
 
         $.ajax({
             beforeSend: function() {
@@ -174,7 +176,8 @@ var Controller = (function($) {
             method: 'POST',
             dataType: 'json',
             data: {
-                filter: selectedOption
+                sort: sortOption,
+                filter: filterOption
             },
             success: function(data) {
                 $('.shopping__items').html(data['shoppingBox']);
@@ -182,7 +185,6 @@ var Controller = (function($) {
                 setTimeout(() => {
                     $('.shopping-box').toggleClass('visible');
                 });
-                // console.log(data);
             }
         });
     });
