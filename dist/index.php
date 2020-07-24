@@ -20,14 +20,14 @@
 				<div class="shopping-form">
 					<div class="wrapper wrapper--sort">
 						<select id="selectSort">
-							<option value="default" selected="selected" class="select-sort__option">Sort by</option>
+							<option value="default" class="select-sort__option">Sort by</option>
 							<option value="asc" class="select-sort__option">Price Low to High</option>
 							<option value="desc" class="select-sort__option">Price High to Low</option>
 						</select>
 					</div>
 					<div class="wrapper wrapper--filter">
 						<select id="selectFilter">
-							<option value="default" selected="selected" class="select-filter__option">Filters</option>
+							<option value="default" class="select-filter__option">Filters</option>
 							<option value="gold" class="select-filter__option">Gold</option>
 							<option value="silver" class="select-filter__option">Silver</option>
 						</select>
