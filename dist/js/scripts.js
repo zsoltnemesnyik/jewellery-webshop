@@ -111,7 +111,8 @@ var Controller = (function($) {
                     formcheck.fieldValidate($(value), '&nbsp', 'form-group__error');
                 }
             });
-            if (elements.custName.val() !== '' && elements.custEmail.val() !== '' && elements.custPhone.val() !== '' && elements.custAddress.val() !== '') {
+            if (true) {
+                
                 $.ajax({
                     url: './includes/send_order.php',
                     method: 'POST',
@@ -131,7 +132,7 @@ var Controller = (function($) {
                         });
                         
                         if (data === 'order_success') {
-                            window.location.href="../dist/pages/finish_order.php";
+                            window.location.href="../pages/finish_order.php";
                         }
                     }
                 });
@@ -140,52 +141,52 @@ var Controller = (function($) {
     });
 
     // Change order of elements
-    $('.select-sort__option').on('keyup change click', (e) => {
+    $('#selectSort').on('change', (e) => {
         let sortOption = ui_control.toggleSelectOption($('.select-sort__option'), $(e.target));
-        let filterOption = $('.select-filter__option[selected=selected]').val();
-
-        $.ajax({
-            beforeSend: function() {
-                $('.shopping-box').toggleClass('visible');
-            },
-            url: './includes/items.php',
-            method: 'POST',
-            dataType: 'json',
-            data: {
-                sort: sortOption,
-                filter: filterOption
-            },
-            success: function(data) {
-                $('.shopping__items').html(data['shoppingBox']);
-                $('.shopping__results-number').text(data['numResults'] + ' product(s)');
-                setTimeout(() => {
-                    $('.shopping-box').toggleClass('visible');
-                });
-            }
-        });
-    });
-    $('.select-filter__option').on('keyup change click', (e) => {
-        let filterOption = ui_control.toggleSelectOption($('.select-filter__option'), $(e.target));
-        let sortOption = $('.select-sort__option[selected=selected]').val();
-
-        $.ajax({
-            beforeSend: function() {
-                $('.shopping-box').toggleClass('visible');
-            },
-            url: './includes/items.php',
-            method: 'POST',
-            dataType: 'json',
-            data: {
-                sort: sortOption,
-                filter: filterOption
-            },
-            success: function(data) {
-                $('.shopping__items').html(data['shoppingBox']);
-                $('.shopping__results-number').text(data['numResults'] + ' product(s)');
-                setTimeout(() => {
-                    $('.shopping-box').toggleClass('visible');
-                });
-            }
-        });
-    });
+          let filterOption = $('#selectFilter').val();
+  
+          $.ajax({
+              beforeSend: function() {
+                  $('.shopping-box').toggleClass('visible');
+              },
+              url: './includes/items.php',
+              method: 'POST',
+              dataType: 'json',
+              data: {
+                  sort: sortOption,
+                  filter: filterOption
+              },
+              success: function(data) {
+                  $('.shopping__items').html(data['shoppingBox']);
+                  $('.shopping__results-number').text(data['numResults'] + ' product(s)');
+                  setTimeout(() => {
+                      $('.shopping-box').toggleClass('visible');
+                  });
+              }
+          });
+      });
+      $('#selectFilter').on('change', (e) => {
+          let filterOption = ui_control.toggleSelectOption($('.select-filter__option'), $(e.target));
+          let sortOption = $('#selectSort').val();
+          
+          $.ajax({
+              beforeSend: function() {
+                  $('.shopping-box').toggleClass('visible');
+              },
+              url: './includes/items.php',
+              method: 'POST',
+              dataType: 'json',
+              data: {
+                  sort: sortOption,
+                  filter: filterOption
+              },
+              success: function(data) {
+                  $('.shopping__items').html(data['shoppingBox']);
+                  $('.shopping__results-number').text(data['numResults'] + ' product(s)');
+                  setTimeout(() => {
+                      $('.shopping-box').toggleClass('visible');
+                  });
+              }
+          });
+      });
 }(jQuery));

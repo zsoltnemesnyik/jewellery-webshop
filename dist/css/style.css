@@ -511,6 +511,7 @@ footer {
   max-height: 90%;
   opacity: 0;
   overflow: hidden;
+  overflow-y: scroll;
   position: fixed;
   top: 50%;
   transform: translate(-50%, -50%);

@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<base href="./">
+	<!-- <base href="./"> -->
 	<title>Jewelry Webshop</title>
 	
 	<?php require './includes/head.php';?>
